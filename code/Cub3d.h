@@ -24,6 +24,7 @@ typedef struct s_vector
 {
 	int	x;
 	int	y;
+	int	count;
 	int	flag;
 }		t_vector;
 

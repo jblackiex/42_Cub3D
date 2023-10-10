@@ -1,6 +1,0 @@
-map_err1.ber
-mw0.ber
-mw1.ber
-mw4.ber
-mw5.ber
-mw.ber

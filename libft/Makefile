@@ -31,7 +31,7 @@ SRC :=	libft/ft_atoi.c\
 	libft/ft_putendl_fd.c\
 	libft/ft_putnbr_fd.c\
 	libft/ft_putstr_fd.c\
-	libft/ft_split.c\
+	libft/ft_split_mod.c\
 	libft/ft_strchr.c\
 	libft/ft_strdup.c\
 	libft/ft_strjoin.c\
@@ -46,7 +46,7 @@ SRC :=	libft/ft_atoi.c\
 	libft/ft_tolower.c\
 	libft/ft_toupper.c\
 	libft/ft_striteri.c\
-	libft/ft_split.c\
+	libft/ft_split_mod.c\
 	libft/ft_strtrim.c
 
 PTF := ft_printf/ft_functions.c\

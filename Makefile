@@ -11,8 +11,8 @@ SRC =	code/main.c \
 	code/utils.c \
 	code/check_matr.c \
 	code/check_map_utils.c \
-	code/imgs.c \
 	code/matr.c \
+	#code/imgs.c \
 	code/keys.c \
 
 BNS = ##

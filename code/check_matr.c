@@ -13,10 +13,10 @@
 
 static int	ft_char_check(t_game *g, int count, int x, int y)
 {
-	while (++y < g->map.size.y && !flag)
+	while (++y < g->map.size.y)
 	{
 		x = 0;
-		while (x < g->map.size.x && !flag)
+		while (x < g->map.size.x)
 		{
 			if (g->map.mat[y][x] != 'N' || g->map.mat[y][x] != 'S'
 					|| g->map.mat[y][x] != ' ' || g->map.mat[y][x] != 'W'
@@ -38,16 +38,16 @@ static int	ft_char_check(t_game *g, int count, int x, int y)
 	return (0);
 }
 
-static void	ft_lngst_row(t_mat *t)
+static void	ft_lngst_row(t_mat *t, char **mat)
 {
 	int	i;
 	int	row;
 
 	i = 0;
 	row = 0;
-	while (t->mat[i])
+	while (mat[i])
 	{
-		t->size.x = ft_strlen(t->mat[i]);
+		t->size.x = ft_strlen(mat[i]);
 		if (t->size.x > row)
 			row = t->size.x;
 		i++;
@@ -56,17 +56,17 @@ static void	ft_lngst_row(t_mat *t)
 	t->size.x = row;
 }
 
-static void	ft_mat_size(t_mat *t)
+static void	ft_mat_size(char **mat, t_mat *t)
 {
 	t->size.x = 0;
 	t->size.y = 0;
 
-	if (!t->mat[0])
+	if (!mat[0])
 		return ;
-	ft_lngst_row(t);
+	ft_lngst_row(t, mat);
 	while (1)
 	{
-		if (!t->mat[t->size.y])
+		if (!mat[t->size.y])
 			break ;
 		t->size.y++;
 	}
@@ -105,17 +105,21 @@ void	check_core(char *str, t_game *var)
 	x = 0;
 	y = -1;
 	check_cub_core(str, &matr);
-	ft_mat_size(&matr->mat[8]);
-	var->map.mat = get_map_cub(matr->mat, &matr);
+	ft_mat_size(&matr.mat[8], &matr);
+	// printf("matr.size.x = %d\n", matr.size.x);
+	// printf("matr.size.y = %d\n", matr.size.y);
+	// ft_free_mat(matr.mat);
+	// return ;
+	var->map.mat = get_map_cub(matr.mat, &matr);
 	if (ft_char_check(var, 0, x, y))
 		flag = printf("\033[1;31mError\n Check elements inside map\n\033[0m");
 	x = var->s_pos.x;
 	y = var->s_pos.y;
-	if (var->map[x + 1][y] == '1' && var[x - 1][y] == '1' &&
-		var[x][y + 1] == '1' && var[x][y - 1] == '1')
+	if (var->map.mat[x + 1][y] == '1' && var->map.mat[x - 1][y] == '1' &&
+		var->map.mat[x][y + 1] == '1' && var->map.mat[x][y - 1] == '1')
 		flag = printf("\033[1;31mError\n Walls around the player\n\033[0m");
 	if (ft_path_check(var, &matr))
-		flag = printf("\033[1;31mError\n Check walls around map\n\033[0m");
+		flag = printf("Check map inside .cub file\n");
 	ft_free_mat(matr.mat);
 	if (flag)
 	{

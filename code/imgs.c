@@ -9,7 +9,7 @@
 /*   Updated: 2023/02/12 15:43:13 by nbordoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long_bonus.h"
+#include "Cub3d.h"
 
 static void	*ft_new_sprite(t_game *g, char *path)
 {

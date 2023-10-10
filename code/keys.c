@@ -9,7 +9,7 @@
 /*   Updated: 2023/02/12 15:43:03 by nbordoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long_bonus.h"
+#include "Cub3d.h"
 
 static int	ft_event_check(char next_pos, t_game *g)
 {

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_mod.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbordoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -60,7 +60,7 @@ static void	*ft_free(char **ptr, int i)
 	return (NULL);
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split_mod(char *s, char c)
 {
 	int		y;
 	int		len;

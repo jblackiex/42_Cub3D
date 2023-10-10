@@ -25,7 +25,6 @@ char **get_map_l(char **map, t_mat *t)
 	return (map_real);
 }
 
-
 int	ft_path_check(t_game *g, t_mat *t)
 {
 	int	res;
@@ -36,7 +35,15 @@ int	ft_path_check(t_game *g, t_mat *t)
 	tmp = get_map_l(&t->mat[8], t);
 	ft_free_mat(t->mat);
 	t->mat = tmp;
+	t->size.count = 0;
 	res = ft_flood_fill(t->mat, t->size, g->s_pos);
+	// add density check to see number of 1s
+	if (t->size.flag == 1)
+		printf("\033[1;31mError\n Space character inside the walls\n\033[0m");
+	else if (res == 1)
+		printf("\033[1;31mError\n 0 on the walls\n\033[0m");
+	if (t->size.count < 10)
+		printf("\033[1;31mError\n Too few moves available in game\n\033[0m");	
 	return (res);
 }
 
@@ -53,14 +60,16 @@ int	ft_free_mat(char **mat)
 
 bool	check_extention(char *str, char *doc_cub)
 {
-	if (ft_strncmp(doc_cub, ".cub", 4))
+	if (!ft_strncmp(doc_cub, ".cub", 4))
 	{
-		if (ft_strncmp(&str[ft_strlen(str) - 4], doc_cub, 4))
+		if (ft_strncmp(&str[ft_strlen(str) - 4], doc_cub, 4)
+			|| str[ft_strlen(str) - 1] != 'b')
 			return (print_error(0, ".cub"), 1);
 	}
-	else if (ft_strncmp(doc_cub, ".xpm", 4))
+	else if (!ft_strncmp(doc_cub, ".xpm", 4))
 	{
-		if (ft_strncmp(&str[ft_strlen(str) - 4], doc_cub, 4))
+		if (ft_strncmp(&str[ft_strlen(str) - 4], doc_cub, 4)
+			|| str[ft_strlen(str) - 1] != 'm')
 			return (print_error(0, ".xpm"), 1);
 	}
 	return (0);

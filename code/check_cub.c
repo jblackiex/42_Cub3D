@@ -14,8 +14,8 @@ bool	check_cub_xpm(t_mat *matr, int i)
 		//qui controllo se file e' vuoto, forse dopo con get_map ma con get_map non va bene perche' mi esce dal programma
 		if (fd < 0 && ++flag)
 			printf("\033[1;31mError\n .xpm file not found\n\033[0m");
+		close (fd);
 	}
-	close (fd);
 	if (flag)
 		return (1);
 	return (0);
@@ -29,7 +29,7 @@ bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 	static int	rgb;
 
 	flag = 0;
-	if (j == 6 && rgb == 3)
+	if (j == 6 && rgb == 2)
 		rgb = 0;
 	buffer = ft_substr(&matr->mat[j][buff], 0, count);
 	if (!buffer)
@@ -58,21 +58,22 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 	flag = 0;
 	comma = 0;
 	count = 0;
-	while (matr->mat[j][2] != ',' && matr->mat[j][++i] && !flag)
+	while (matr->mat[j][i] && matr->mat[j][2] != ','
+		&& matr->mat[j][++i] && !flag)
 	{
 		buff = i;
-		while (matr->mat[j][i] != ',' && ++count)
+		while (matr->mat[j][i] && matr->mat[j][i] != ',' && ++count)
 			i++;
-		if (++comma && (!ft_isalnum(matr->mat[i][j]) || count > 3))
-			++flag;
-		if (comma > 3)
+		if (++comma && (!ft_isdigit(matr->mat[j][--i]) || count > 3))
+			++flag; //isdigit da fare per ogni numero, mettere dentro rgb_save
+		if (++i && comma > 3) // fare controllo tipo 002
 			++flag;
 		if (!flag && check_rgb_save(matr, j, buff, count))
 			++flag;
 		count = 0;
 	}
-	if (flag || comma != 3 || !comma || matr->mat[j][i] == ',')
-		return (print_error(0, "Check RGB options inside .cub file"), 1);
+	if (flag || comma != 3 || matr->mat[j][--i] == ',')
+		return (print_error(0, " Check RGB options inside .cub file"), 1);
 	return (0);
 }
 
@@ -101,6 +102,8 @@ void check_cub_core(char *path, t_mat *matr)
 	flag = 0;
 	i = -1;
 	matr->mat = get_map(path);
+	// printf("matr->mat[0] = %s\n", matr->mat[0]);
+	// printf("matr->mat[1] = %s\n", matr->mat[1]);
 	if (ft_strncmp(matr->mat[0], "NO ", 3) && ++flag)
 		print_error(0, "NO ");
 	if (ft_strncmp(matr->mat[1], "SO ", 3) && ++flag)
