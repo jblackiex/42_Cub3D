@@ -32,9 +32,9 @@ int	ft_path_check(t_game *g, t_mat *t)
 	char **tmp;
 
 	// now i m gonna increase mat dim adding the L character with a function
-	tmp = get_map_l(&t->mat[8], t);
-	ft_free_mat(t->mat);
-	t->mat = tmp;
+	// tmp = get_map_l(&t->mat[8], t);
+	// ft_free_mat(t->mat);
+	// t->mat = tmp;
 	t->size.count = 0;
 	res = ft_flood_fill(t->mat, t->size, g->s_pos);
 	// add density check to see number of 1s

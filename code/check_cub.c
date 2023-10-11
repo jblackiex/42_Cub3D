@@ -66,9 +66,9 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 		while (matr->mat[j][i] && matr->mat[j][i] != ',' && ++count)
 			i++;
 		if (++comma && count > 3)
-			++flag; //isdigit da fare per ogni numero, mettere dentro rgb_save
+			++flag;
 		if (comma > 3 || (matr->mat[j][buff] == '0'
-			&& (matr->mat[j][buff + 1] && matr->mat[j][buff + 1] != ','))) // fare controllo tipo 002
+			&& (matr->mat[j][buff + 1] && matr->mat[j][buff + 1] != ',')))
 			++flag;
 		if (!flag && check_rgb_save(matr, j, buff, count))
 			++flag;
