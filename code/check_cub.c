@@ -32,20 +32,22 @@ bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 	if (j == 6 && rgb == 2)
 		rgb = 0;
 	buffer = ft_substr(&matr->mat[j][buff], 0, count);
-	if (!buffer)
+	if (--buff && !buffer)
 		return (1);
+	while(!flag && matr->mat[j][++buff] && matr->mat[j][buff] != ',')
+		if (!ft_isdigit(matr->mat[j][buff]))
+			flag = 1;
 	num = ft_atoi(buffer);
-	if (num < 0 || num > 255)
+	if (!flag && (num < 0 || num > 255))
 		++flag;
-	else
+	else if (!flag)
 		if (j == 5)
 			matr->rgb[0].color[rgb++] = num; // F
 		else
 			matr->rgb[1].color[rgb++] = num; // C
-	free(buffer);
 	if (flag)
-		return (1);
-	return (0);
+		return (free(buffer), 1);
+	return (free(buffer), 0);
 }
 
 bool	check_rgb_trio(t_mat *matr, int j, int i)
@@ -58,15 +60,15 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 	flag = 0;
 	comma = 0;
 	count = 0;
-	while (matr->mat[j][i] && matr->mat[j][2] != ','
-		&& matr->mat[j][++i] && !flag)
+	while (matr->mat[j][i] && matr->mat[j][2] != ',' && ++i && !flag)
 	{
 		buff = i;
 		while (matr->mat[j][i] && matr->mat[j][i] != ',' && ++count)
 			i++;
-		if (++comma && (!ft_isdigit(matr->mat[j][--i]) || count > 3))
+		if (++comma && count > 3)
 			++flag; //isdigit da fare per ogni numero, mettere dentro rgb_save
-		if (++i && comma > 3) // fare controllo tipo 002
+		if (comma > 3 || (matr->mat[j][buff] == '0'
+			&& (matr->mat[j][buff + 1] && matr->mat[j][buff + 1] != ','))) // fare controllo tipo 002
 			++flag;
 		if (!flag && check_rgb_save(matr, j, buff, count))
 			++flag;
