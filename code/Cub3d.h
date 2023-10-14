@@ -106,7 +106,7 @@ int		ft_print_sprite(t_game *g, void *sprite, t_vector coor);
 int		ft_check_enemy(t_game *g, int x, int y);
 int		ft_checky_enemy(t_game *g, int x, int y);
 int		ft_display_stats(t_game *g, int color);
-int		ft_flood_fill(char **tab, t_vector size, t_vector begin);
+int		ft_flood_fill(char **tab, t_vector *size, t_vector begin);
 void	*ft_new_window(t_program *p, int widht, int height, char *name);
 
 #endif

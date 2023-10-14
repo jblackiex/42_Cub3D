@@ -42,6 +42,7 @@ char	**get_map(char *mapy)
 		ft_free_ptr((void *)&old_address);
 		ft_free_ptr((void *)&holder);
 	}
+
 	result = ft_split_mod(map, '\n');
 	ft_free_ptr((void *)&map);
 	return (close(fd), result);

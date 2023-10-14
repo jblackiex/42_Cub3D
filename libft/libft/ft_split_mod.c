@@ -29,7 +29,8 @@ static int	ft_string(char *str, char c)
 		while (str[y] != c && str[y])
 			y++;
 	}
-	return (st);
+	// printf ("DIM_SPLIT=%ld\n", st);
+	return (st + 2);
 }
 
 static char	*ft_create_string(char *str, char c)
@@ -38,13 +39,13 @@ static char	*ft_create_string(char *str, char c)
 	int		y;
 
 	y = 0;
-	if (str[0] == c)
-		y++;
-	else
-	{
+	// if (str[0] == c)
+	// 	y++;
+	// else
+	// {
 		while (str[y] && str[y] != c)
 			y++;
-	}
+	// }
 	k = (char *) malloc(sizeof(char) * (y + 1));
 	if (!k)
 		return (NULL);
@@ -69,7 +70,7 @@ char	**ft_split_mod(char *s, char c)
 	if (!s)
 		return (NULL);
 	len = ft_string(s, c);
-	ptr = (char **) malloc(sizeof(char *) * (len +1));
+	ptr = (char **) malloc(sizeof(char *) * (len + 1));
 	if (!ptr)
 		return (NULL);
 	y = -1;
