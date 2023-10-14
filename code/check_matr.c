@@ -71,9 +71,10 @@ char **get_map_cub(char **map, t_mat *t)
 		ft_free_mat(map);
 		exit (1);
 	}
-	map_real = (char **) ft_calloc(t->size.y + 1, sizeof(char *)); // here instead of 9 i should ve set the num of rows
+	map_real = (char **) ft_calloc(t->size.y + 2, sizeof(char *)); // here instead of 9 i should ve set the num of rows
 	while (map[i])
 		map_real[j++] = ft_strdup(map[i++]);
+	map_real[j] = NULL;
 	return (map_real);
 }
 void	print_map(char **map)
@@ -100,12 +101,12 @@ void	check_core(char *str, t_game *var)
 	// print_map(matr.mat);
 	ft_mat_size(&matr.mat[8], &matr);
 	var->map.size.y = matr.size.y;
-	printf("matr.size.x = %d\n", matr.size.x);
-	printf("matr.size.y = %d\n", matr.size.y);
+	// printf("matr.size.x = %d\n", matr.size.x);
+	// printf("matr.size.y = %d\n", matr.size.y);
 	var->map.mat = get_map_cub(matr.mat, &matr);
 	if (ft_char_check(var, 0, x, y))
 		flag = printf("\033[1;31mError\n Check elements inside map\n\033[0m");
-	print_map(var->map.mat);
+	// print_map(var->map.mat);
 	x = var->s_pos.x;
 	y = var->s_pos.y;
 	if (var->map.mat[x + 1][y] == '1' && var->map.mat[x - 1][y] == '1' &&

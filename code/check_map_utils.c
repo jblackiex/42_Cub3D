@@ -39,8 +39,6 @@ int	ft_path_check(t_game *g, t_mat *t)
 	// add density check to see number of 1s
 	if (t->size.flag == 1)
 		printf("\033[1;31mError\n Space character inside the walls\n\033[0m");
-	else if (res == 1)
-		printf("\033[1;31mError\n 0 on the walls\n\033[0m");
 	else if (t->size.count < 10)
 		printf("\033[1;31mError\n Too few moves available in game\n\033[0m");	
 	return (res);
@@ -50,9 +48,9 @@ int	ft_free_mat(char **mat)
 {
 	int	y;
 
-	y = -1;
-	while (mat[++y])
-		free(mat[y]);
+	y = 0;
+	while (mat[y])
+		free(mat[y++]);
 	free(mat);
 	return (0);
 }
