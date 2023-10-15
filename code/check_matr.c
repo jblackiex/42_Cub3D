@@ -19,9 +19,10 @@ static int	ft_char_check(t_game *g, int count, int x, int y)
 		while (g->map.mat[y] && g->map.mat[y][++x])
 		{
 			if ((g->map.mat[y][x] != 'N' && g->map.mat[y][x] != 'S'
-					&& g->map.mat[y][x] != ' ' && g->map.mat[y][x] != 'W'
-					&& g->map.mat[y][x] != 'E' && g->map.mat[y][x] != '0'
-					&& g->map.mat[y][x] != '1') || count > 1)
+					&& g->map.mat[y][x] != ' ' && g->map.mat[y][x] != '\t'
+					&& g->map.mat[y][x] != 'W' && g->map.mat[y][x] != 'E'
+					&& g->map.mat[y][x] != '0' && g->map.mat[y][x] != '1')
+					|| count > 1)
 				return (1);
 			else if (g->map.mat[y][x] == 'N' || g->map.mat[y][x] == 'S' ||
 					g->map.mat[y][x] == 'W' || g->map.mat[y][x] == 'E')
@@ -77,6 +78,7 @@ char **get_map_cub(char **map, t_mat *t)
 	map_real[j] = NULL;
 	return (map_real);
 }
+
 void	print_map(char **map)
 {
 	int	i;

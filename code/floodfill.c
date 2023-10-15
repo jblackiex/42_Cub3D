@@ -13,12 +13,13 @@
 
 static void	ft_find(char **temp, t_vector *size, t_vector pos)
 {
-	if (size->flag || !(&temp[pos.y][pos.x]) || temp[pos.y][pos.x] == ' ')
+	if (size->flag || !(&temp[pos.y][pos.x]) || temp[pos.y][pos.x] == ' ' || 
+		temp[pos.y][pos.x] == '\t')
 	{
 		size->flag = 1;
 		return ;
 	}
-	if (size->flag || pos.x < 0 || pos.x > size->x || pos.y < 0
+	if (pos.x < 0 || pos.x > size->x || pos.y < 0
 		|| pos.y >= size->y
 		|| temp[pos.y][pos.x] == '1')
 		return ;
