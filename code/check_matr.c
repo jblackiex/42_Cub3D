@@ -82,14 +82,27 @@ char **get_map_cub(char **map, t_mat *t)
 	return (map_real);
 }
 
-void	print_map(char **map)
+// void	print_map(char **map)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while(map[i])
+// 		printf("map[%d] = %s\n", i, map[i++]);
+
+// }
+
+static void	copy_rgb(t_game *var, t_mat *matr)
 {
 	int	i;
 
 	i = 0;
-	while(map[i])
-		printf("map[%d] = %s\n", i, map[i++]);
-
+	while (i < 3)
+	{
+		var->map.rgb[0].color[i] = matr->rgb[0].color[i];
+		var->map.rgb[1].color[i] = matr->rgb[1].color[i];
+		i++;
+	}
 }
 
 void	check_core(char *str, t_game *var)
@@ -113,6 +126,7 @@ void	check_core(char *str, t_game *var)
 	y = var->s_pos.y;
 	if (!flag && ft_path_check(var, &matr))
 		flag = printf("\033[1;31m Check map inside .cub file\n\033[0m");
+	copy_rgb(var, &matr);
 	if (ft_free_mat(matr.mat) && flag && ft_free_mat(var->map.mat))
 		exit(1);
 }

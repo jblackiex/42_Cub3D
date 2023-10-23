@@ -39,6 +39,7 @@ typedef struct s_mat
 	t_rgb		rgb[2];
 	char		**mat;
 	int			fd;
+	int			k;
 	int			j;
 	int			i;
 	int			fl;

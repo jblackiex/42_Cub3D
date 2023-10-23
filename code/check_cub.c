@@ -35,7 +35,7 @@ bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 	static int	rgb;
 
 	flag = 0;
-	if (j == 6 && rgb == 2)
+	if (rgb == 3 && ++matr->k)
 		rgb = 0;
 	buffer = ft_substr(&matr->mat[j][buff], 0, count);
 	if (--buff && !buffer)
@@ -47,7 +47,7 @@ bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 	if (!flag && (num < 0 || num > 255))
 		++flag;
 	else if (!flag)
-		if (j == 5)
+		if (!matr->k)
 			matr->rgb[0].color[rgb++] = num; // F
 		else
 			matr->rgb[1].color[rgb++] = num; // C
@@ -92,6 +92,7 @@ bool	check_cub_rgb(t_mat *matr, int *i)
 
 	f = 0;
 	tmp = *i + 1;
+	matr->k = 0;
 	if (ft_strncmp(matr->mat[*i], "F ", 2) && ++f)
 		print_error(0, "F ");
 	if ((in_i(matr, &tmp) || ft_strncmp(matr->mat[tmp], "C ", 2)) && ++f)

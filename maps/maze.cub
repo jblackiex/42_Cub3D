@@ -3,12 +3,12 @@ SO ./textures/door.xpm
 WE ./textures/guardian.xpm
 EA ./textures/wall.xpm
 
-F 0,255,0
+F 0,255,3
 C 42,82,190
 
 
 111
-1 1
+111
 101
 1011111111111111111111111111111
 1000000000011000000000001000001

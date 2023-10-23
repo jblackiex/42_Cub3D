@@ -39,27 +39,27 @@ void	print_error(int fd, char *str)
 		printf("\033[1;31mError\n%s\n\033[0m", str);
 }
 
-// void	*ft_new_window(t_program *p, int widht, int height, char *name)
-// {
-// 	void	*win;
+void	*ft_new_window(t_program *p, int widht, int height, char *name)
+{
+	void	*win;
 
-// 	win = mlx_new_window(p->mlx, widht, height, name);
-// 	p->win_size.x = widht;
-// 	p->win_size.y = height;
-// 	return (win);
-// }
+	win = mlx_new_window(p->mlx, widht, height, name);
+	p->win_size.x = widht;
+	p->win_size.y = height;
+	return (win);
+}
 
-// int	ft_close_game(t_game *g)
-// {
-// 	ft_free_mat(g->map.mat);
-// 	ft_free_sprites(g);
-// 	mlx_destroy_window(g->game.mlx, g->game.win);
-// 	mlx_destroy_display(g->game.mlx);
-// 	free(g->game.mlx);
-// 	exit(0);
-// }
+int	ft_close_game(t_game *g)
+{
+	ft_free_mat(g->xpm);
+	ft_free_mat(g->map.mat);
+	// ft_free_sprites(g);
+	mlx_destroy_window(g->game.mlx, g->game.win);
+	mlx_destroy_display(g->game.mlx);
+	free(g->game.mlx);
+	exit(0);
+}
 
-`
 
 int	main(int ac, char **av)
 {
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 		return (1);
 	check_core(av[1], &var);
 	printf("YOU DID IT\n");
-	//lessgo(&var);
+	// lessgo(&var);
 	ft_free_mat(var.map.mat);
 	return (0);
 }
