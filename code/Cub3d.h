@@ -38,7 +38,11 @@ typedef struct s_mat
 {
 	t_rgb		rgb[2];
 	char		**mat;
+	char 		*xpm[4];
 	int			fd;
+	int			j;
+	int			i;
+	int			fl;
 	t_vector	size;
 }		t_mat;
 
@@ -88,7 +92,7 @@ void	check_cub_core(char *path, t_mat *matr);
 void	check_core(char *path, t_game *p);
 void	print_error(int fd, char *str);
 char	**get_map(char *mapy);
-bool	check_cub_rgb(t_mat *matr);
+bool	check_cub_rgb(t_mat *matr, int *i);
 bool	check_extention(char *str, char *doc_cub);
 char	**get_map_cub(char **map, t_mat *t);
 

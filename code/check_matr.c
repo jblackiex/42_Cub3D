@@ -19,9 +19,10 @@ static int	ft_char_check(t_game *g, int count, int x, int y)
 		while (g->map.mat[y] && g->map.mat[y][++x])
 		{
 			if ((g->map.mat[y][x] != 'N' && g->map.mat[y][x] != 'S'
-					&& g->map.mat[y][x] != ' ' && g->map.mat[y][x] != '\t'
+					&& g->map.mat[y][x] != 32 && g->map.mat[y][x] != '\t'
 					&& g->map.mat[y][x] != 'W' && g->map.mat[y][x] != 'E'
-					&& g->map.mat[y][x] != '0' && g->map.mat[y][x] != '1')
+					&& g->map.mat[y][x] != '0' && g->map.mat[y][x] != '1'
+					&& g->map.mat[y][x] != '\n')
 					|| count > 1)
 				return (1);
 			else if (g->map.mat[y][x] == 'N' || g->map.mat[y][x] == 'S' ||
@@ -34,6 +35,8 @@ static int	ft_char_check(t_game *g, int count, int x, int y)
 				}
 		}
 	}
+	if (count != 1)
+		return (printf("\033[1;31mError\n Missing player char\n\033[0m"), 1);
 	return (0);
 }
 
@@ -64,7 +67,7 @@ char **get_map_cub(char **map, t_mat *t)
 
 	i = 0;
 	j = 0;
-	while (map[i] && i < 8)
+	while (map[i] && i < t->i)
 		i++;
 	if (!map[i])
 	{
@@ -99,27 +102,17 @@ void	check_core(char *str, t_game *var)
 	flag = 0;
 	x = 0;
 	y = -1;
+	matr.fl = 0;
 	check_cub_core(str, &matr);
-	// print_map(matr.mat);
-	ft_mat_size(&matr.mat[8], &matr);
+	ft_mat_size(&matr.mat[matr.i], &matr);
 	var->map.size.y = matr.size.y;
-	// printf("matr.size.x = %d\n", matr.size.x);
-	// printf("matr.size.y = %d\n", matr.size.y);
 	var->map.mat = get_map_cub(matr.mat, &matr);
 	if (ft_char_check(var, 0, x, y))
-		flag = printf("\033[1;31mError\n Check elements inside map\n\033[0m");
-	// print_map(var->map.mat);
+		flag = printf("\033[1;31mError\n Wrong elements inside map\n\033[0m");
 	x = var->s_pos.x;
 	y = var->s_pos.y;
-	if (var->map.mat[x + 1][y] == '1' && var->map.mat[x - 1][y] == '1' &&
-		var->map.mat[x][y + 1] == '1' && var->map.mat[x][y - 1] == '1')
-		flag = printf("\033[1;31mError\n Walls around the player\n\033[0m");
-	if (ft_path_check(var, &matr))
+	if (!flag && ft_path_check(var, &matr))
 		flag = printf("\033[1;31m Check map inside .cub file\n\033[0m");
-	ft_free_mat(matr.mat);
-	if (flag)
-	{
-		ft_free_mat(var->map.mat);
+	if (ft_free_mat(matr.mat) && flag && ft_free_mat(var->map.mat))
 		exit(1);
-	}
 }

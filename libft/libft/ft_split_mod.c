@@ -18,11 +18,15 @@ static int	ft_string(char *str, char c)
 
 	y = 0;
 	st = 0;
-	if (str[y] == c)
-		return(++st);
+	// if (str[y] == c)
+	// 	return(++st);
+	if (str[y] == c && ++st)
+		y++;
 	while (str[y])
 	{
-		while (str[y] == c)
+		if (str[y] == c && str[y - 1] == c)
+			st++;
+		if (str[y] == c)
 			y++;
 		if (str[y] != c && str[y])
 			st++;
@@ -30,7 +34,7 @@ static int	ft_string(char *str, char c)
 			y++;
 	}
 	// printf ("DIM_SPLIT=%ld\n", st);
-	return (st + 2);
+	return (st + 1);
 }
 
 static char	*ft_create_string(char *str, char c)
@@ -39,14 +43,14 @@ static char	*ft_create_string(char *str, char c)
 	int		y;
 
 	y = 0;
-	// if (str[0] == c)
-	// 	y++;
-	// else
-	// {
+	if (str[0] == c)
+		y++;
+	else
+	{
 		while (str[y] && str[y] != c)
 			y++;
-	// }
-	k = (char *) malloc(sizeof(char) * (y + 1));
+	}
+	k = (char *) ft_calloc(y + 1, sizeof(char));
 	if (!k)
 		return (NULL);
 	ft_strlcpy(k, str, y + 1);
@@ -70,7 +74,7 @@ char	**ft_split_mod(char *s, char c)
 	if (!s)
 		return (NULL);
 	len = ft_string(s, c);
-	ptr = (char **) malloc(sizeof(char *) * (len + 1));
+	ptr = (char **) ft_calloc(len + 1, sizeof(char *));
 	if (!ptr)
 		return (NULL);
 	y = -1;
@@ -82,7 +86,7 @@ char	**ft_split_mod(char *s, char c)
 		if (!ptr[y])
 			return (ft_free(ptr, y));
 		s = s + ft_strlen(ptr[y]);
-		if (*s == c)
+		if (*s == c && (*(s - 1) && (*(s - 1) != c)))
 			s++;
 	}
 	ptr[y] = 0;

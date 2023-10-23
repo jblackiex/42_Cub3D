@@ -11,17 +11,29 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
+static int	null_check(char **temp, t_vector pos, t_vector *size)
+{
+	if (!size->flag)
+	{
+		if (!temp[pos.y] || pos.x >= (int)ft_strlen(temp[pos.y]) ||
+			pos.x < 0 || !(&temp[pos.y][pos.x]) || temp[pos.y][pos.x] == '\0')
+			return (1);
+	}
+	else if (size->flag)
+		return (1);
+	return (0);
+}
+
+
 static void	ft_find(char **temp, t_vector *size, t_vector pos)
 {
-	if (size->flag || !(&temp[pos.y][pos.x]) || temp[pos.y][pos.x] == ' ' || 
-		temp[pos.y][pos.x] == '\t')
+	if (null_check(temp, pos, size) || temp[pos.y][pos.x] == ' '
+		|| temp[pos.y][pos.x] == '\t' || temp[pos.y][pos.x] == '\n')
 	{
 		size->flag = 1;
 		return ;
 	}
-	if (pos.x < 0 || pos.x > size->x || pos.y < 0
-		|| pos.y >= size->y
-		|| temp[pos.y][pos.x] == '1')
+	if (!size->flag && temp[pos.y][pos.x] == '1')
 		return ;
 	temp[pos.y][pos.x] = '1';
 	size->count++;

@@ -1,58 +1,28 @@
 #include "Cub3d.h"
 
-// char **get_map_l(char **map, t_mat *t)
-// {
-// 	int	i;
-// 	int k;
-// 	int	j;
-// 	char **map_real;
-
-// 	i = 0;
-// 	k = 0;
-// 	map_real = (char **) ft_calloc(t->size.y + 2, sizeof(char *)); // here instead of 9 i should ve set the num of rows
-// 	map_real[i] = (char *) ft_memset(ft_calloc(t->size.x + 2, sizeof(char)),
-// 		'L', t->size.x + 2);
-// 	map_real[t->size.y + 1] = (char *) ft_memset(ft_calloc(t->size.x + 2,
-// 		sizeof(char)), 'L', t->size.x + 2);
-// 	while (map[i])
-// 	{
-// 		j = 0;
-// 		map_real[++k] = (char *) ft_memset(ft_calloc(t->size.x + 2, sizeof(char)), 'L', t->size.x + 2);
-// 		while (++j < t->size.x)
-// 			map_real[k][j] = map[i][j - 1];
-// 		i++;
-// 	}
-// 	return (map_real);
-// }
-
 int	ft_path_check(t_game *g, t_mat *t)
 {
 	int	res;
-	int	check;
-	char **tmp;
 
-	// now i m gonna increase mat dim adding the L character with a function
-	// ft_free_mat(t->mat);
-	// t->mat = tmp;
 	t->size.count = 0;
-	res = ft_flood_fill(&t->mat[8], &t->size, g->s_pos);
-	// add density check to see number of 1s
+	res = ft_flood_fill(&t->mat[t->i], &t->size, g->s_pos);
 	if (t->size.flag == 1)
-		printf("\033[1;31mError\n Space character inside the walls\n\033[0m");
+		printf("\033[1;31mError\n Map is not surrounded by walls\n\033[0m");
 	else if (t->size.count < 10)
-		printf("\033[1;31mError\n Too few moves available in game\n\033[0m");	
+		res = printf("\033[1;31mError\n Too few moves available\n\033[0m");	
 	return (res);
 }
 
 int	ft_free_mat(char **mat)
 {
 	int	y;
+	int dim;
 
 	y = 0;
 	while (mat[y])
 		free(mat[y++]);
 	free(mat);
-	return (0);
+	return (1);
 }
 
 bool	check_extention(char *str, char *doc_cub)
