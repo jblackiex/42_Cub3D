@@ -59,26 +59,7 @@ void	print_error(int fd, char *str)
 // 	exit(0);
 // }
 
-// void	lessgo(t_game *g)
-// {
-// 	g->w = 48;
-// 	g->fire = 0;
-// 	g->x1 = 0;
-// 	g->x2 = 0;
-// 	g->game.mlx = mlx_init();
-// 	ft_load_sprites(g);
-// 	g->moves = 0;
-// 	g->c_cur = 0;
-// 	g->game.win = ft_new_window(&g->game,
-// 			g->map.size.x * g->sprites.size.x + 0,
-// 			g->map.size.y * g->sprites.size.y + 32, "./so_long");
-// 	ft_stats(g, 0xFFFFFF);
-// 	mlx_hook(g->game.win, 2, 1L << 0, ft_core_keys, g);
-// 	mlx_hook(g->game.win, 17, 0, ft_close_game, g);
-// 	mlx_loop_hook(g->game.mlx, ft_display_mat, g);
-// 	mlx_loop(g->game.mlx);
-// }
-
+`
 
 int	main(int ac, char **av)
 {

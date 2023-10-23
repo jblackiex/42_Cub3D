@@ -1,5 +1,34 @@
 #include "Cub3d.h"
 
+int	in_i(t_mat *matr, int *i)
+{
+	int j;
+
+	j = 0;
+	while (matr->mat[*i] && &matr->mat[*i][j] && matr->mat[*i][j])
+	{
+		if (matr->fl)
+			j = 2;
+		while (&(matr->mat[*i][j]) && (matr->mat[*i][j] == ' '
+			|| matr->mat[*i][j] == '\t'))
+			j++;
+		if (matr->mat[*i][j] && (&matr->mat[*i][j]) && matr->mat[*i][j] == '\n')
+			while (!matr->fl && matr->mat[*i] && matr->mat[*i][0] == '\n')
+				*i += 1;
+		if (matr->mat[*i] && (!matr->mat[*i][j] || (matr->mat[*i][j] != ' '
+			&& matr->mat[*i][j] != '\t')))
+			{
+				matr->j = j;
+				break ;
+			}
+		j = 0;
+	}
+	if (!matr->mat[*i] || !(&matr->mat[*i][j]) ||
+		(!matr->fl && j && matr->mat[*i][j - 1] == ' '))
+		return (printf("\033[1;31mError\n check spaces .cub file\n\033[0m"), 1);
+	return (matr->fl = 0, 0);
+}
+
 int	ft_path_check(t_game *g, t_mat *t)
 {
 	int	res;

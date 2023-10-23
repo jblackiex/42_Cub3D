@@ -1,52 +1,25 @@
 #include "Cub3d.h"
 
-int	in_i(t_mat *matr, int *i)
+bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 {
-	int j;
-
-	j = 0;
-	while (matr->mat[*i] && &matr->mat[*i][j] && matr->mat[*i][j])
-	{
-		if (matr->fl)
-			j = 2;
-		while (&(matr->mat[*i][j]) && (matr->mat[*i][j] == ' '
-			|| matr->mat[*i][j] == '\t'))
-			j++;
-		if (matr->mat[*i][j] && (&matr->mat[*i][j]) && matr->mat[*i][j] == '\n')
-			while (!matr->fl && matr->mat[*i] && matr->mat[*i][0] == '\n')
-				*i += 1;
-		if (matr->mat[*i] && (!matr->mat[*i][j] || (matr->mat[*i][j] != ' '
-			&& matr->mat[*i][j] != '\t')))
-			{
-				matr->j = j;
-				break ;
-			}
-		j = 0;
-	}
-	if (!matr->mat[*i] || !(&matr->mat[*i][j]) ||
-		(!matr->fl && j && matr->mat[*i][j - 1] == ' '))
-		return (printf("\033[1;31mError\n check spaces .cub file\n\033[0m"), 1);
-	return (matr->fl = 0, 0);
-}
-
-bool	check_cub_xpm(t_mat *matr, int i)
-{
-	int	fd;
-	int	flag;
-	char buff;
+	int			fd;
+	int			flag;
+	char		buff;
+	static int	xpm;
 
 	flag = 0;
 	if (check_extention(&matr->mat[i][matr->j], ".xpm"))
 		++flag;
 	if (!flag)
 	{
-		fd = open(&matr->mat[i][matr->j], O_RDONLY); // forse queste me le devo salvare
+		fd = open(&matr->mat[i][matr->j], O_RDONLY);
 		if (fd < 0 && close(fd))
 			return (printf("\033[1;31mError\n .xpm not found\n\033[0m"), 1);
 		flag = read(fd, &buff, 1);
 		close(fd);
 		if (flag <= 0)
 			return (printf("\033[1;31mError\n .xpm empty\n\033[0m"), 1);
+		var->xpm[xpm++] = ft_strdup(&matr->mat[i][matr->j]); // da freeare
 	}
 	else if (flag)
 		return (1);
@@ -135,7 +108,7 @@ bool	check_cub_rgb(t_mat *matr, int *i)
 }
 
 //se ho problemi close fd in caso di errori. Vedere file matr_bonus
-void check_cub_core(char *path, t_mat *matr)
+void check_cub_core(char *path, t_mat *matr, t_game *var)
 {
 	int	f;
 	int	i;
@@ -157,7 +130,7 @@ void check_cub_core(char *path, t_mat *matr)
 	i = tmp;
 	tmp = -1;
 	while (!f && ++tmp < 4 && ++matr->fl)
-		if (in_i(matr, &i) || check_cub_xpm(matr, i) || !(++i)
+		if (in_i(matr, &i) || check_cub_xpm(matr, i, var) || !(++i)
 			|| in_i(matr, &i))
 			++f;
 	if (((!f && check_cub_rgb(matr, &i)) || f) && ft_free_mat(matr->mat))

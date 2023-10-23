@@ -38,7 +38,6 @@ typedef struct s_mat
 {
 	t_rgb		rgb[2];
 	char		**mat;
-	char 		*xpm[4];
 	int			fd;
 	int			j;
 	int			i;
@@ -79,6 +78,7 @@ typedef struct s_game
 	t_vector	s_pos; // prima era hero_pos
 	char		orientation;
 	int			c_max;
+	char 		*xpm[4];
 	int			c_cur;
 	int			moves;
 	int			f;
@@ -88,7 +88,8 @@ typedef struct s_game
 	int			w;
 }		t_game;
 
-void	check_cub_core(char *path, t_mat *matr);
+void	check_cub_core(char *path, t_mat *matr, t_game *var);
+int		in_i(t_mat *matr, int *i);
 void	check_core(char *path, t_game *p);
 void	print_error(int fd, char *str);
 char	**get_map(char *mapy);

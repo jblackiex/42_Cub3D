@@ -103,7 +103,7 @@ void	check_core(char *str, t_game *var)
 	x = 0;
 	y = -1;
 	matr.fl = 0;
-	check_cub_core(str, &matr);
+	check_cub_core(str, &matr, var);
 	ft_mat_size(&matr.mat[matr.i], &matr);
 	var->map.size.y = matr.size.y;
 	var->map.mat = get_map_cub(matr.mat, &matr);
