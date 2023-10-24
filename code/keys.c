@@ -59,9 +59,9 @@ static int	ft_events(char next_pos, int x, int y, t_game *g)
 			g->map.mat[y][x] = 'A';
 		else if (g->fire != 1)
 			g->map.mat[y][x] = 'P';
-		g->map.mat[g->hero_pos.y][g->hero_pos.x] = '0';
-		g->hero_pos.x = x;
-		g->hero_pos.y = y;
+		g->map.mat[g->s_pos.y][g->s_pos.x] = '0';
+		g->s_pos.x = x;
+		g->s_pos.y = y;
 	}
 	return (0);
 }
@@ -69,17 +69,17 @@ static int	ft_events(char next_pos, int x, int y, t_game *g)
 static int	ft_dealy(t_game *g)
 {
 	if (g->w == 'w')
-		ft_events(g->map.mat[g->hero_pos.y - 1][g->hero_pos.x],
-			g->hero_pos.x, g->hero_pos.y - 1, g);
+		ft_events(g->map.mat[g->s_pos.y - 1][g->s_pos.x],
+			g->s_pos.x, g->s_pos.y - 1, g);
 	else if (g->w == 'a')
-		ft_events(g->map.mat[g->hero_pos.y][g->hero_pos.x - 1],
-			g->hero_pos.x - 1, g->hero_pos.y, g);
+		ft_events(g->map.mat[g->s_pos.y][g->s_pos.x - 1],
+			g->s_pos.x - 1, g->s_pos.y, g);
 	else if (g->w == 's')
-		ft_events(g->map.mat[g->hero_pos.y + 1][g->hero_pos.x],
-			g->hero_pos.x, g->hero_pos.y + 1, g);
+		ft_events(g->map.mat[g->s_pos.y + 1][g->s_pos.x],
+			g->s_pos.x, g->s_pos.y + 1, g);
 	else if (g->w == 'p')
-		ft_events(g->map.mat[g->hero_pos.y][g->hero_pos.x + 1],
-			g->hero_pos.x + 1, g->hero_pos.y, g);
+		ft_events(g->map.mat[g->s_pos.y][g->s_pos.x + 1],
+			g->s_pos.x + 1, g->s_pos.y, g);
 	return (0);
 }
 

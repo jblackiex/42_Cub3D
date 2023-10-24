@@ -1,5 +1,5 @@
-NAME = Cub3d
-NAME2 = Cub3d
+NAME = cub3d
+NAME2 = cub3d
 
 LIBFT = libft/libft.a
 
@@ -12,7 +12,7 @@ SRC =	code/main.c \
 	code/check_matr.c \
 	code/check_map_utils.c \
 	code/matr.c \
-	#code/imgs.c \
+	code/imgs.c \
 	code/keys.c \
 
 BNS = ##
