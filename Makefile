@@ -12,6 +12,8 @@ SRC =	code/main.c \
 	code/check_matr.c \
 	code/check_map_utils.c \
 	code/matr.c \
+	code/raycasting.c \
+	code/raycasting_utils.c \
 	code/imgs.c \
 	code/keys.c \
 

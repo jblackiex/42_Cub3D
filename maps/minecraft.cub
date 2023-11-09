@@ -1,16 +1,16 @@
-NO ./pics/tnt.xpm
-SO ./pics/grass.xpm
-WE ./pics/bookshelf.xpm
-EA ./pics/cobblestone.xpm
+NO ./textures/new/brick_azure.xpm
+SO ./textures/new/brick_azure.xpm
+WE ./textures/new/brick_azure.xpm
+EA ./textures/new/brick_azure.xpm
 
-C 42,82,190
 F 0,128,0
+C 42,82,190
 
 111111111111
 100000000001
-100000000001
-10000E000001
-100000000001
+100000000001111
+10000N0000000001
+100000000000111
 100000000001
 100000000001
 111111111111

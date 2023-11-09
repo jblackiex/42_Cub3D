@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <math.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 
@@ -89,6 +90,23 @@ typedef struct s_game
 	int			w;
 }		t_game;
 
+
+typedef struct s_data
+{
+	int		width;
+	int		height;
+	float	p_x;
+	float	p_y;
+	float	fov;
+	float	angle;
+	float	p_angle;
+	void	*mlx;
+	void	*win;
+	char	**map;
+}	t_data;
+
+
+// Parsing Map
 void	check_cub_core(char *path, t_mat *matr, t_game *var);
 int		in_i(t_mat *matr, int *i);
 void	check_core(char *path, t_game *p);
@@ -97,6 +115,17 @@ char	**get_map(char *mapy);
 bool	check_cub_rgb(t_mat *matr, int *i);
 bool	check_extention(char *str, char *doc_cub);
 char	**get_map_cub(char **map, t_mat *t);
+int		ft_flood_fill(char **tab, t_vector *size, t_vector begin);
+
+
+//Raycasting
+void	initializer(t_data *data);
+int		handle_keypress(int keycode, t_data *data);
+void	move_player(t_data *data, float dx, float dy);
+void	rotate_player(t_data *data, float angle);
+int		quitter(t_data *data);
+int		idle_handler(t_data *data);
+void	render(t_data *data);
 
 
 int		ft_close_game(t_game *g);
@@ -111,8 +140,7 @@ int		ft_free_sprites(t_game *g);
 int		ft_print_sprite(t_game *g, void *sprite, t_vector coor);
 int		ft_check_enemy(t_game *g, int x, int y);
 int		ft_checky_enemy(t_game *g, int x, int y);
-int		ft_display_stats(t_game *g, int color);
-int		ft_flood_fill(char **tab, t_vector *size, t_vector begin);
+// int		ft_display_stats(t_game *g, int color);
 void	*ft_new_window(t_program *p, int widht, int height, char *name);
 
 #endif

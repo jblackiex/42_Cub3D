@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
+void	initializer(t_data *data)
+{
+	data->width = 1200;
+	data->height = 800;
+	// data->p_x = 4.5;
+	// data->p_y = 4.5;
+	data->fov = 90 * (M_PI / 180);
+	data->angle = 0;
+	data->p_angle = 0;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, data->width, data->height, "Cub3D");
+}
+
 int	ft_stats(t_game *g, int color)
 {
 	char	*str;

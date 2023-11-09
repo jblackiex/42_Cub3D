@@ -11,54 +11,6 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
-typedef struct s_data
-{
-	int		width;
-	int		height;
-	float	p_x;
-	float	p_y;
-	float	fov;
-	float	angle;
-	float	p_angle;
-	void	*mlx;
-	void	*win;
-	
-}	t_data;
-
-char	map[10][10] = {
-    "1111111111",
-    "1000000001",
-    "1000000001",
-    "1000000001",
-    "10000P0001",
-    "1000000001",
-    "1001001001",
-    "1000000001",
-    "1000000001",
-    "1111111111"
-};
-
-int	quitter(t_data *data)
-{
-	mlx_destroy_window(data->mlx, data->win);
-	free(data);
-	exit(0);
-	return (0);
-}
-
-void	initializer(t_data *data)
-{
-	data->width = 1200;
-	data->height = 800;
-	data->p_x = 4.5;
-	data->p_y = 4.5;
-	data->fov = 90 * (M_PI / 180);
-	data->angle = 0;
-	data->p_angle = 0;
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, data->width, data->height, "Cub3D");
-}
-
 void	render(t_data *data)
 {
 	int		x;
@@ -129,7 +81,7 @@ void	render(t_data *data)
 				side = 1;
 			}
 			
-			if (map[map_x][map_y] == '1')
+			if (data->map[map_x][map_y] == '1')
 				hit = 1;
 		}
 
@@ -177,61 +129,4 @@ void	render(t_data *data)
 				mlx_pixel_put(data->mlx, data->win, x, y, floor_color);
 		}
 	}
-}
-
-int	idle_handler(t_data *data)
-{
-	render(data);
-}
-void	move_player(t_data *data, float dx, float dy)
-{
-    data->p_x += dx;
-    data->p_y += dy;
-    mlx_clear_window(data->mlx, data->win);
-    render(data);
-}
-
-void	rotate_player(t_data *data, float angle)
-{
-    data->p_angle += angle;
-    mlx_clear_window(data->mlx, data->win);
-    render(data);
-}
-
-int	handle_keypress(int keycode, t_data *data)
-{
-	float	move_speed = 0.1;
-	float	rotation_speed = 0.05;
-
-	if (keycode == 65307)
-		quitter(data);
-	else if (keycode == 119)
-		move_player(data, move_speed * cos(data->p_angle), move_speed * sin(data->p_angle));
-	else if (keycode == 100)
-		move_player(data, -move_speed * sin(data->p_angle), move_speed * cos(data->p_angle));
-	else if (keycode == 115)
-		move_player(data, -move_speed * cos(data->p_angle), -move_speed * sin(data->p_angle));
-	else if (keycode == 97)
-		move_player(data, move_speed * sin(data->p_angle), -move_speed * cos(data->p_angle));
-	else if (keycode == 65361)
-		rotate_player(data, -rotation_speed);
-	else if (keycode == 65363)
-		rotate_player(data, rotation_speed);
-	return (0);
-}
-
-int	main(void)
-{
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	initializer(data);
-	render(data);
-	// mlx_do_key_autorepeaton(data->mlx);
-	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
-	mlx_hook(data->win, 17, 0, quitter, data);
-	mlx_loop_hook(data->mlx, (int (*)(void *))idle_handler, data);
-	mlx_loop(data->mlx);
-	quitter(data);
-	return (0);
 }
