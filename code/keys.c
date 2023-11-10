@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
-int	handle_keypress(int keycode, t_data *data)
+int	handle_keypress(int keycode, t_game *data)
 {
 	float	move_speed = 0.1;
 	float	rotation_speed = 0.05;
 
 	if (keycode == 65307)
-		quitter(data);
+		ft_close_game(data);
 	else if (keycode == 119)
 		move_player(data, move_speed * cos(data->p_angle), move_speed
 			* sin(data->p_angle));

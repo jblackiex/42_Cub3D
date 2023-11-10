@@ -39,43 +39,24 @@ void	print_error(int fd, char *str)
 		printf("\033[1;31mError\n%s\n\033[0m", str);
 }
 
-void	*ft_new_window(t_program *p, int widht, int height, char *name)
-{
-	void	*win;
-
-	win = mlx_new_window(p->mlx, widht, height, name);
-	p->win_size.x = widht;
-	p->win_size.y = height;
-	return (win);
-}
-
 int	ft_close_game(t_game *g)
 {
+	mlx_destroy_window(g->mlx, g->win);
+	mlx_destroy_display(g->mlx);
+	free(g->mlx);
 	ft_free_mat(g->xpm);
 	ft_free_mat(g->map.mat);
-	// ft_free_sprites(g);
-	mlx_destroy_window(g->game.mlx, g->game.win);
-	mlx_destroy_display(g->game.mlx);
-	free(g->game.mlx);
 	exit(0);
 }
 
 void	lessgo(t_game *g)
 {
-	t_data	*data;
-
-	data = (t_data *)malloc(sizeof(t_data));
-	initializer(data);
-	data->p_x = (float)g->s_pos.x + 0.5;
-	data->p_y = (float)g->s_pos.y + 0.5;
-	data->map = g->map.mat;
-	render(data);
-	// mlx_do_key_autorepeaton(data->mlx);
-	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
-	mlx_hook(data->win, 17, 0, quitter, data);
-	mlx_loop_hook(data->mlx, (int (*)(void *))idle_handler, data);
-	mlx_loop(data->mlx);
-	quitter(data);
+	initializer(g);
+	render(g);
+	mlx_hook(g->win, 2, 1L << 0, handle_keypress, g);
+	mlx_hook(g->win, 17, 0, quitter, g);
+	mlx_loop_hook(g->mlx, (int (*)(void *))idle_handler, g);
+	mlx_loop(g->mlx);
 }
 
 int	main(int ac, char **av)

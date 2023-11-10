@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
-int	idle_handler(t_data *data)
+int	idle_handler(t_game *data)
 {
 	render(data);
 }
 
-void	move_player(t_data *data, float dx, float dy)
+void	move_player(t_game *data, float dx, float dy)
 {
 	data->p_x += dx;
 	data->p_y += dy;
@@ -24,14 +24,14 @@ void	move_player(t_data *data, float dx, float dy)
 	render(data);
 }
 
-void	rotate_player(t_data *data, float angle)
+void	rotate_player(t_game *data, float angle)
 {
 	data->p_angle += angle;
 	mlx_clear_window(data->mlx, data->win);
 	render(data);
 }
 
-int	quitter(t_data *data)
+int	quitter(t_game *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	free(data);

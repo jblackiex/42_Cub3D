@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
-void	render(t_data *data)
+void	render(t_game *data)
 {
 	int		x;
 	int		y;
-	int		floor_color = 0x404040;
-	int		ceiling_color = 0x808080;
+	int		floor_color = data->map.rgb[0].color[0] * 65536 + data->map.rgb[0].color[1] * 256 + data->map.rgb[0].color[2];
+	int		ceiling_color = data->map.rgb[1].color[0] * 65536 + data->map.rgb[1].color[1] * 256 + data->map.rgb[1].color[2];
 
 	x = -1;
 	while (++x < data->width)
@@ -81,7 +81,7 @@ void	render(t_data *data)
 				side = 1;
 			}
 			
-			if (data->map[map_x][map_y] == '1')
+			if (data->map.mat[map_x][map_y] == '1')
 				hit = 1;
 		}
 

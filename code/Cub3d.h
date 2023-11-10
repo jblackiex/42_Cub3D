@@ -64,46 +64,22 @@ typedef struct s_sprites
 	t_vector	size;
 }		t_sprites;
 
-typedef struct s_program
-{
-	void		*mlx;
-	void		*win;
-	t_vector	win_size;
-}		t_program;
-
 typedef struct s_game
 {
-	t_program	game;
 	t_mat		map;
-	t_sprites	sprites;
-	t_vector	sprite_pos;
 	t_vector	s_pos; // prima era hero_pos
 	char		orientation;
-	int			c_max;
 	char 		*xpm[4];
-	int			c_cur;
-	int			moves;
-	int			f;
-	int			x1;
-	int			x2;
-	int			fire;
-	int			w;
+	int			width;
+	int			height;
+	float		p_x;
+	float		p_y;
+	float		fov;
+	float		angle;
+	float		p_angle;
+	void		*mlx;
+	void		*win;
 }		t_game;
-
-
-typedef struct s_data
-{
-	int		width;
-	int		height;
-	float	p_x;
-	float	p_y;
-	float	fov;
-	float	angle;
-	float	p_angle;
-	void	*mlx;
-	void	*win;
-	char	**map;
-}	t_data;
 
 
 // Parsing Map
@@ -116,31 +92,19 @@ bool	check_cub_rgb(t_mat *matr, int *i);
 bool	check_extention(char *str, char *doc_cub);
 char	**get_map_cub(char **map, t_mat *t);
 int		ft_flood_fill(char **tab, t_vector *size, t_vector begin);
-
+int		ft_path_check(t_game *g, t_mat *var);
 
 //Raycasting
-void	initializer(t_data *data);
-int		handle_keypress(int keycode, t_data *data);
-void	move_player(t_data *data, float dx, float dy);
-void	rotate_player(t_data *data, float angle);
-int		quitter(t_data *data);
-int		idle_handler(t_data *data);
-void	render(t_data *data);
+void	initializer(t_game *data);
+int		handle_keypress(int keycode, t_game *data);
+void	move_player(t_game *data, float dx, float dy);
+void	rotate_player(t_game *data, float angle);
+int		quitter(t_game *data);
+int		idle_handler(t_game *data);
+void	render(t_game *data);
 
 
 int		ft_close_game(t_game *g);
-int		ft_core_keys(int tasto, t_game *g);
-int		ft_deal_enemy(t_game *g);
-int		ft_display_mat(t_game *p);
-int		ft_stats(t_game *g, int color);
 int		ft_free_mat(char **mat);
-int		ft_path_check(t_game *g, t_mat *var);
-int		ft_load_sprites(t_game *g);
-int		ft_free_sprites(t_game *g);
-int		ft_print_sprite(t_game *g, void *sprite, t_vector coor);
-int		ft_check_enemy(t_game *g, int x, int y);
-int		ft_checky_enemy(t_game *g, int x, int y);
-// int		ft_display_stats(t_game *g, int color);
-void	*ft_new_window(t_program *p, int widht, int height, char *name);
 
 #endif
