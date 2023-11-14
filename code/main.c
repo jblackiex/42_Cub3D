@@ -53,11 +53,22 @@ void	lessgo(t_game *g)
 {
 	initializer(g);
 	render(g);
-	mlx_hook(g->win, 2, 1L << 0, handle_keypress, g);
+	mlx_hook(g->win, 2, 1L<<0, handle_keypress, g);
+	mlx_hook(g->win, 3, 1L<<1, handle_keyrelease, g);
 	mlx_hook(g->win, 17, 0, quitter, g);
 	mlx_loop_hook(g->mlx, (int (*)(void *))idle_handler, g);
 	mlx_loop(g->mlx);
+	quitter(g);
 }
+
+//TODO
+
+//collisione muri
+//texture posizionate correttamente
+//check mappa rivedere
+//scoprire cosa va freeato (ci sono cosa da freeare) --> //valgrind -s --leak-check=full --show-leak-kinds=all ./cub3d maps/minecraft.cub
+//norminette
+
 
 int	main(int ac, char **av)
 {

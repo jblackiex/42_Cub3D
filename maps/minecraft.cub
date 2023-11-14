@@ -1,7 +1,7 @@
 NO ./textures/new/brick_azure.xpm
-SO ./textures/new/brick_azure.xpm
-WE ./textures/new/brick_azure.xpm
-EA ./textures/new/brick_azure.xpm
+SO ./textures/new/brick_black.xpm
+WE ./textures/new/brick_pink.xpm
+EA ./textures/new/brick_lime.xpm
 
 F 0,128,0
 C 42,82,190

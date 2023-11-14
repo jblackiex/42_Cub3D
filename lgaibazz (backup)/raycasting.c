@@ -11,6 +11,66 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
+// Structure to hold texture data
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_texture;
+
+typedef struct s_data
+{
+	int		width;
+	int		height;
+	int		move_up;
+	int		move_down;
+	int		move_left;
+	int		move_right;
+	int		turn_left;
+	int		turn_right;
+	float		p_x;
+	float		p_y;
+	float		fov;
+	float		angle;
+	float		p_angle;
+	void		*mlx;
+	void		*win;
+	t_texture	textures[4];
+}	t_data;
+
+char map[10][10] = {
+	"1111111111",
+	"1000000001",
+	"1000000111",
+	"1000000001",
+	"10000P0001",
+	"1000000001",
+	"1001001001",
+	"1000000001",
+	"1000110001",
+	"1111111111"
+};
+
+int	quitter(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+		mlx_destroy_image(data->mlx, data->textures[i].img);
+	mlx_destroy_window(data->mlx, data->win);
+	free(data->mlx);
+	free(data);
+	exit(0);
+	return (0);
+}
+
+// Function to load a texture image
 t_texture	load_texture(void *mlx, char *path)
 {
 	t_texture	texture;
@@ -21,6 +81,30 @@ t_texture	load_texture(void *mlx, char *path)
 	return (texture);
 }
 
+void	initializer(t_data *data)
+{
+	data->width = 1200;
+	data->height = 800;
+	data->p_x = 4.5;
+	data->p_y = 4.5;
+	data->fov = 35 * (M_PI / 180);
+	data->angle = 0;
+	data->p_angle = 0;
+	data->move_up = 0;
+	data->move_down = 0;
+	data->move_left = 0;
+	data->move_right = 0;
+	data->turn_left = 0;
+	data->turn_right = 0;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, data->width, data->height, "Cub3D");
+	data->textures[0] = load_texture(data->mlx, "texture/brick_black.xpm");
+	data->textures[1] = load_texture(data->mlx, "texture/brick_pink.xpm");
+	data->textures[2] = load_texture(data->mlx, "texture/brick_orange.xpm");
+	data->textures[3] = load_texture(data->mlx, "texture/brick_lime.xpm");
+}
+
+// Function to render the scene
 void	render(t_game *data)
 {
 	int		x;
@@ -161,4 +245,97 @@ void	render(t_game *data)
 			mlx_pixel_put(data->mlx, data->win, x, y, color);
 		}
 	}
+}
+
+void	move_player(t_data *data, float dx, float dy)
+{
+	data->p_x += dx;
+	data->p_y += dy;
+}
+
+void	rotate_player(t_data *data, float angle)
+{
+	data->p_angle += angle;
+	while(data->p_angle >= 2 * M_PI)
+		data->p_angle -= 2 * M_PI;
+	while(data->p_angle < 0)
+		data->p_angle += 2 * M_PI;
+}
+
+int	handle_keypress(int keycode, t_data *data)
+{
+	// Set the corresponding key state to 1 when a key is pressed
+	if (keycode == 65307)
+		exit(0);
+	else if (keycode == 119) // W key
+		data->move_up = 1;
+	else if (keycode == 100) // D key
+		data->move_right = 1;
+	else if (keycode == 115) // S key
+		data->move_down = 1;
+	else if (keycode == 97) // A key
+		data->move_left = 1;
+	else if (keycode == 65361) // Left arrow key
+		data->turn_left = 1;
+	else if (keycode == 65363) // Right arrow key
+		data->turn_right = 1;
+	return (0);
+}
+
+int	handle_keyrelease(int keycode, t_data *data)
+{
+	// Set the corresponding key state to 0 when a key is released
+	if (keycode == 119)			// W key
+		data->move_up = 0;
+	else if (keycode == 100)		// D key
+		data->move_right = 0;
+	else if (keycode == 115)		// S key
+		data->move_down = 0;
+	else if (keycode == 97)		// A key
+		data->move_left = 0;
+	else if (keycode == 65361)		// Left arrow key
+		data->turn_left = 0;
+	else if (keycode == 65363)		// Right arrow key
+		data->turn_right = 0;
+	return (0);
+}
+
+int	idle_handler(t_data *data)
+{
+	float move_speed = 0.15;
+	float rotation_speed = 0.08;
+
+	// Update player position based on key states
+	if (data->move_up)
+		move_player(data, move_speed * cos(data->p_angle), move_speed * sin(data->p_angle));
+	if (data->move_down)
+		move_player(data, -move_speed * cos(data->p_angle), -move_speed * sin(data->p_angle));
+	if (data->move_left)
+		move_player(data, move_speed * sin(data->p_angle), -move_speed * cos(data->p_angle));
+	if (data->move_right)
+		move_player(data, -move_speed * sin(data->p_angle), move_speed * cos(data->p_angle));
+	// Update player angle based on key states
+	if (data->turn_left)
+		rotate_player(data, -rotation_speed);
+	if (data->turn_right)
+		rotate_player(data, rotation_speed);
+	render(data);
+	usleep(16666);
+	return (0);
+}
+
+int	main(void)
+{
+	t_data		*data;
+
+	data = malloc(sizeof(t_data));
+	initializer(data);
+	render(data);
+	mlx_hook(data->win, 2, 1L<<0, handle_keypress, data);
+	mlx_hook(data->win, 3, 1L<<1, handle_keyrelease, data);
+	mlx_hook(data->win, 17, 0, quitter, data);
+	mlx_loop_hook(data->mlx, (int (*)(void *))idle_handler, data);
+	mlx_loop(data->mlx);
+	quitter(data);
+	return (0);
 }
