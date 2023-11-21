@@ -58,6 +58,35 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
+typedef struct s_render
+{
+	int			x;
+	int			y;
+	int			hit;
+	int			side;
+	int			map_x;
+	int			map_y;
+	int			tex_x;
+	int			tex_y;
+	int			step_x;
+	int			step_y;
+	int			draw_end;
+	int			draw_start;
+	int			wall_color;
+	int			line_height;
+	int			floor_color;
+	int			ceiling_color;
+	double		wall_x;
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+}		t_render;
+
 typedef struct s_game
 {
 	t_mat		map;
@@ -79,9 +108,9 @@ typedef struct s_game
 	float		p_angle;
 	void		*mlx;
 	void		*win;
+	t_render	r;
 	t_texture	textures[4];
 }		t_game;
-
 
 // Parsing Map
 void	check_cub_core(char *path, t_mat *matr, t_game *var);

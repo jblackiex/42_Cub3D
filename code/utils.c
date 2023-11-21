@@ -13,8 +13,8 @@
 
 void	initializer(t_game *data)
 {
-	data->width = 1200;
-	data->height = 800;
+	data->width = 1000;
+	data->height = 600;
 	data->p_x = (float)data->s_pos.x + 0.5;
 	data->p_y = (float)data->s_pos.y + 0.5;
 	data->fov = 35 * (M_PI / 180);
@@ -34,7 +34,7 @@ void	initializer(t_game *data)
 	data->turn_right = 0;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->width, data->height, "Cub3D");
-	data->textures[0] = load_texture(data->mlx, data->xpm[0]); // da vedere poi se posizionate in modo corretto
+	data->textures[0] = load_texture(data->mlx, data->xpm[0]);
 	data->textures[1] = load_texture(data->mlx, data->xpm[1]);
 	data->textures[2] = load_texture(data->mlx, data->xpm[2]);
 	data->textures[3] = load_texture(data->mlx, data->xpm[3]);
