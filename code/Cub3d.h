@@ -132,13 +132,11 @@ void		move_player(t_game *data, float dx, float dy);
 void		rotate_player(t_game *data, float angle);
 int			quitter(t_game *data);
 int			idle_handler(t_game *data);
-void		render(t_game *data);
+void		render_1(t_game *g);
+void		render_6(t_game *g, t_texture texture);
 t_texture	load_texture(void *mlx, char *path);
 int			handle_keypress(int keycode, t_game *data);
 int			handle_keyrelease(int keycode, t_game *data);
-
-
-
 
 int		ft_close_game(t_game *g);
 int		ft_free_mat(char **mat);

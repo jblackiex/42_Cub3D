@@ -19,13 +19,13 @@ void	initializer(t_game *data)
 	data->p_y = (float)data->s_pos.y + 0.5;
 	data->fov = 35 * (M_PI / 180);
 	if (data->orientation == 'N')
-		data->p_angle = 1.5 * M_PI;
-	else if (data->orientation == 'S')
-		data->p_angle = 0.5 * M_PI;
+		data->p_angle = M_PI;
 	else if (data->orientation == 'E')
+		data->p_angle = 0.5 * M_PI;
+	else if (data->orientation == 'S')
 		data->p_angle = 0;
 	else if (data->orientation == 'W')
-		data->p_angle = M_PI;
+		data->p_angle = 1.5 * M_PI;
 	data->move_up = 0;
 	data->move_down = 0;
 	data->move_left = 0;
@@ -34,7 +34,7 @@ void	initializer(t_game *data)
 	data->turn_right = 0;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->width, data->height, "Cub3D");
-	data->textures[0] = load_texture(data->mlx, data->xpm[0]); // da vedere poi se posizionate in modo corretto
+	data->textures[0] = load_texture(data->mlx, data->xpm[0]);
 	data->textures[1] = load_texture(data->mlx, data->xpm[1]);
 	data->textures[2] = load_texture(data->mlx, data->xpm[2]);
 	data->textures[3] = load_texture(data->mlx, data->xpm[3]);

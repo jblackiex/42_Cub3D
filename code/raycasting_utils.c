@@ -1,88 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgaibazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 17:14:56 by lgaibazz          #+#    #+#             */
-/*   Updated: 2023/10/27 17:14:58 by lgaibazz         ###   ########.fr       */
+/*   Created: 2023/11/21 23:16:43 by lgaibazz          #+#    #+#             */
+/*   Updated: 2023/11/21 23:34:01 by lgaibazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Cub3d.h"
 
-int	idle_handler(t_game *data)
+t_texture	load_texture(void *mlx, char *path)
 {
-	float	move_speed = 0.15;
-	float	rotation_speed = 0.08;
+	t_texture	texture;
 
-	if (data->move_up)
-		move_player(data, move_speed * cos(data->p_angle), move_speed * sin(data->p_angle));
-	if (data->move_down)
-		move_player(data, -move_speed * cos(data->p_angle), -move_speed * sin(data->p_angle));
-	if (data->move_left)
-		move_player(data, move_speed * sin(data->p_angle), -move_speed * cos(data->p_angle));
-	if (data->move_right)
-		move_player(data, -move_speed * sin(data->p_angle), move_speed * cos(data->p_angle));
-	if (data->turn_left)
-		rotate_player(data, -rotation_speed);
-	if (data->turn_right)
-		rotate_player(data, rotation_speed);
-	render(data);
-	usleep(16666);
-	return (0);
+	texture.img = mlx_xpm_file_to_image(mlx, path, &texture.width, &texture.height);
+	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel, &texture.line_length, &texture.endian);
+	return (texture);
 }
 
-void	move_player(t_game *data, float dx, float dy)
+void	render_6(t_game *g, t_texture texture)
 {
-	if (data->map.mat[(int)(data->p_x + dx)][(int)(data->p_y + dy)] != '1')
+	int	color;
+
+	g->r.wall_x -= floor(g->r.wall_x);
+	g->r.tex_x = (int)(g->r.wall_x * (double)texture.width);
+	if ((g->r.side == 0 && g->r.ray_dir_x > 0) || (g->r.side == 1 && g->r.ray_dir_y < 0))
+		g->r.tex_x = texture.width - g->r.tex_x - 1;
+	g->r.y = -1;
+	while (++g->r.y < g->height)
 	{
-		data->p_x += dx;
-		data->p_y += dy;
+		if (g->r.y < g->r.draw_start)
+			color = g->r.ceiling_color;
+		else if (g->r.y >= g->r.draw_start && g->r.y < g->r.draw_end)
+		{
+			g->r.tex_y = (int)(g->r.y * 2 - g->height + g->r.line_height) * (double)texture.height / g->r.line_height / 2;
+			color = *(int *)(texture.addr + (g->r.tex_y * texture.line_length + g->r.tex_x * (texture.bits_per_pixel / 8)));
+		}
+		else
+			color = g->r.floor_color;
+		mlx_pixel_put(g->mlx, g->win, g->r.x, g->r.y, color);
 	}
-}
-
-void	rotate_player(t_game *data, float angle)
-{
-	data->p_angle += angle;
-	while(data->p_angle >= 2 * M_PI)
-		data->p_angle -= 2 * M_PI;
-	while(data->p_angle < 0)
-		data->p_angle += 2 * M_PI;
-}
-
-int	handle_keypress(int keycode, t_game *data)
-{
-	if (keycode == 65307)
-		exit(0);
-	else if (keycode == 119)
-		data->move_up = 1;
-	else if (keycode == 100)
-		data->move_right = 1;
-	else if (keycode == 115)
-		data->move_down = 1;
-	else if (keycode == 97)
-		data->move_left = 1;
-	else if (keycode == 65361)
-		data->turn_left = 1;
-	else if (keycode == 65363)
-		data->turn_right = 1;
-	return (0);
-}
-
-int	handle_keyrelease(int keycode, t_game *data)
-{
-	if (keycode == 119)
-		data->move_up = 0;
-	else if (keycode == 100)
-		data->move_right = 0;
-	else if (keycode == 115)
-		data->move_down = 0;
-	else if (keycode == 97)
-		data->move_left = 0;
-	else if (keycode == 65361)
-		data->turn_left = 0;
-	else if (keycode == 65363)
-		data->turn_right = 0;
-	return (0);
 }
