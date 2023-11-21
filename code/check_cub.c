@@ -26,7 +26,6 @@ bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 	return (0);
 }
 
-
 bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 {
 	char		*buffer;
@@ -40,7 +39,7 @@ bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 	buffer = ft_substr(&matr->mat[j][buff], 0, count);
 	if (--buff && !buffer)
 		return (1);
-	while(!flag && matr->mat[j][++buff] && matr->mat[j][buff] != ',')
+	while (!flag && matr->mat[j][++buff] && matr->mat[j][buff] != ',')
 		if (!ft_isdigit(matr->mat[j][buff]))
 			flag = 1;
 	num = ft_atoi(buffer);
@@ -48,9 +47,9 @@ bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 		++flag;
 	else if (!flag)
 		if (!matr->k)
-			matr->rgb[0].color[rgb++] = num; // F
+			matr->rgb[0].color[rgb++] = num;
 		else
-			matr->rgb[1].color[rgb++] = num; // C
+			matr->rgb[1].color[rgb++] = num;
 	if (flag)
 		return (free(buffer), 1);
 	return (free(buffer), 0);
@@ -61,7 +60,7 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 	int	flag;
 	int	count;
 	int	comma;
-	int buff;
+	int	buff;
 
 	flag = 0;
 	comma = 0;
@@ -99,8 +98,8 @@ bool	check_cub_rgb(t_mat *matr, int *i)
 		print_error(0, "C ");
 	++matr->fl;
 	if (!f && ((in_i(matr, i) || check_rgb_trio(matr, *i, matr->j - 1)
-	|| !(++(*i)) || in_i(matr, i)) || !(++matr->fl) || in_i(matr, i)
-	|| check_rgb_trio(matr, *i, matr->j - 1)))
+				|| !(++(*i)) || in_i(matr, i)) || !(++matr->fl) || in_i(matr, i)
+			|| check_rgb_trio(matr, *i, matr->j - 1)))
 		++f;
 	if (f || !(++(*i)) || in_i(matr, i))
 		return (1);
@@ -108,8 +107,7 @@ bool	check_cub_rgb(t_mat *matr, int *i)
 	return (0);
 }
 
-//se ho problemi close fd in caso di errori. Vedere file matr_bonus
-void check_cub_core(char *path, t_mat *matr, t_game *var)
+void	check_cub_core(t_mat *matr, t_game *var, t_mat *cub)
 {
 	int	f;
 	int	i;
@@ -117,16 +115,16 @@ void check_cub_core(char *path, t_mat *matr, t_game *var)
 
 	f = 0;
 	i = 0;
-	matr->mat = get_map(path);
+	order_map(matr, cub);
 	in_i(matr, &i);
 	tmp = i;
 	if (ft_strncmp(matr->mat[i++], "NO ", 3) && ++f)
 		print_error(0, "NO ");
-	if ((in_i(matr, &i) || ft_strncmp(matr->mat[i++], "SO ", 3)) && ++f)
+	if (!f && (in_i(matr, &i) || ft_strncmp(matr->mat[i++], "SO ", 3) && ++f))
 		print_error(0, "SO ");
-	if ((in_i(matr, &i) || ft_strncmp(matr->mat[i++], "WE ", 3)) && ++f)
+	if (!f && (in_i(matr, &i) || ft_strncmp(matr->mat[i++], "WE ", 3)) && ++f)
 		print_error(0, "WE ");
-	if ((in_i(matr, &i) || ft_strncmp(matr->mat[i++], "EA ", 3)) && ++f)
+	if (!f && (in_i(matr, &i) || ft_strncmp(matr->mat[i++], "EA ", 3)) && ++f)
 		print_error(0, "EA ");
 	i = tmp;
 	tmp = -1;

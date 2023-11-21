@@ -81,7 +81,7 @@ void	render(t_game *g)
 				g->r.side = 1;
 			}
 
-			if (g->map.mat[g->r.map_x][g->r.map_y] == '1')
+			if (&g->map.mat[g->r.map_x][g->r.map_y] && g->map.mat[g->r.map_x][g->r.map_y] == '1')
 				g->r.hit = 1;
 		}
 		// Calculate the perpendicular distance to the wall

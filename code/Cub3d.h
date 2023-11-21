@@ -113,7 +113,7 @@ typedef struct s_game
 }		t_game;
 
 // Parsing Map
-void	check_cub_core(char *path, t_mat *matr, t_game *var);
+void	check_cub_core(t_mat *matr, t_game *var, t_mat *cub);
 int		in_i(t_mat *matr, int *i);
 void	check_core(char *path, t_game *p);
 void	print_error(int fd, char *str);
@@ -123,6 +123,7 @@ bool	check_extention(char *str, char *doc_cub);
 char	**get_map_cub(char **map, t_mat *t);
 int		ft_flood_fill(char **tab, t_vector *size, t_vector begin);
 int		ft_path_check(t_game *g, t_mat *var);
+void	order_map(t_mat *tmp, t_mat *matr);
 
 //Raycasting
 void		initializer(t_game *data);

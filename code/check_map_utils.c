@@ -2,7 +2,7 @@
 
 int	in_i(t_mat *matr, int *i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (matr->mat[*i] && &matr->mat[*i][j] && matr->mat[*i][j])
@@ -17,10 +17,10 @@ int	in_i(t_mat *matr, int *i)
 				*i += 1;
 		if (matr->mat[*i] && (!matr->mat[*i][j] || (matr->mat[*i][j] != ' '
 			&& matr->mat[*i][j] != '\t')))
-			{
-				matr->j = j;
-				break ;
-			}
+		{
+			matr->j = j;
+			break ;
+		}
 		j = 0;
 	}
 	if (!matr->mat[*i] || !(&matr->mat[*i][j]) ||
@@ -38,14 +38,13 @@ int	ft_path_check(t_game *g, t_mat *t)
 	if (t->size.flag == 1)
 		printf("\033[1;31mError\n Map is not surrounded by walls\n\033[0m");
 	else if (t->size.count < 10)
-		res = printf("\033[1;31mError\n Too few moves available\n\033[0m");	
+		res = printf("\033[1;31mError\n Too few moves available\n\033[0m");
 	return (res);
 }
 
 int	ft_free_mat(char **mat)
 {
 	int	y;
-	int dim;
 
 	y = 0;
 	while (mat[y])
