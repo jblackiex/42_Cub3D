@@ -16,7 +16,7 @@ void	initializer(t_game *data)
 	data->width = 1200;
 	data->height = 800;
 	data->p_x = (float)data->s_pos.y + 0.5;
-	data->p_y = (float)data->s_pos.x + 0.5;
+	data->p_y = ft_strlen(data->map.mat[(int)data->p_x]) - (float)data->s_pos.x + 0.5; //da sistemare, devo inizializzare pos giocatore appena flippo
 	data->fov = 35 * (M_PI / 180);
 	if (data->orientation == 'N')
 		data->p_angle = M_PI;
@@ -48,7 +48,7 @@ static int	ft_find_str(char *str)
 	while (str[i])
 	{
 		if (str[i] == ',' || str[i] == '.' || (str[i] != '0' && str[i] != '1')
-				|| (str[i] == '\n' && str[i + 1] != '\0'))
+			|| (str[i] == '\n' && str[i + 1] != '\0'))
 			if (str[i] != 'S' && str[i] != 'N' && str[i] != 'E'
 				&& str[i] != 'W')
 				return (0);

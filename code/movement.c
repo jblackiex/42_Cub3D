@@ -13,17 +13,23 @@
 
 int	idle_handler(t_game *data)
 {
-	float	move_speed = 0.15;
-	float	rotation_speed = 0.08;
+	float	move_speed;
+	float	rotation_speed;
 
+	move_speed = 0.15;
+	rotation_speed = 0.08;
 	if (data->move_up)
-		move_player(data, move_speed * cos(data->p_angle), move_speed * sin(data->p_angle));
+		move_player(data, move_speed * cos(data->p_angle), move_speed
+			* sin(data->p_angle));
 	if (data->move_down)
-		move_player(data, -move_speed * cos(data->p_angle), -move_speed * sin(data->p_angle));
+		move_player(data, -move_speed * cos(data->p_angle), -move_speed
+			* sin(data->p_angle));
 	if (data->move_left)
-		move_player(data, move_speed * sin(data->p_angle), -move_speed * cos(data->p_angle));
+		move_player(data, move_speed * sin(data->p_angle), -move_speed
+			* cos(data->p_angle));
 	if (data->move_right)
-		move_player(data, -move_speed * sin(data->p_angle), move_speed * cos(data->p_angle));
+		move_player(data, -move_speed * sin(data->p_angle), move_speed
+			* cos(data->p_angle));
 	if (data->turn_left)
 		rotate_player(data, -rotation_speed);
 	if (data->turn_right)
@@ -45,9 +51,9 @@ void	move_player(t_game *data, float dx, float dy)
 void	rotate_player(t_game *data, float angle)
 {
 	data->p_angle += angle;
-	while(data->p_angle >= 2 * M_PI)
+	while (data->p_angle >= 2 * M_PI)
 		data->p_angle -= 2 * M_PI;
-	while(data->p_angle < 0)
+	while (data->p_angle < 0)
 		data->p_angle += 2 * M_PI;
 }
 

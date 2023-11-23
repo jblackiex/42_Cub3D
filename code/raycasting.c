@@ -39,16 +39,18 @@ void	render_5(t_game *g)
 void	render_4(t_game *g)
 {
 	if (g->r.side == 0)
-		g->r.perp_wall_dist = (g->r.map_x - g->p_x + (1 - g->r.step_x) / 2) / g->r.ray_dir_x;
+		g->r.perp_wall_dist = (g->r.map_x - g->p_x + (1 - g->r.step_x) / 2)
+			/ g->r.ray_dir_x;
 	else
-		g->r.perp_wall_dist = (g->r.map_y - g->p_y + (1 - g->r.step_y) / 2) / g->r.ray_dir_y;
+		g->r.perp_wall_dist = (g->r.map_y - g->p_y + (1 - g->r.step_y) / 2)
+			/ g->r.ray_dir_y;
 	g->r.line_height = (int)(g->height / g->r.perp_wall_dist);
 	g->r.draw_start = -g->r.line_height / 2 + g->height / 2;
-		if (g->r.draw_start < 0)
-			g->r.draw_start = 0;
-		g->r.draw_end = g->r.line_height / 2 + g->height / 2;
-		if (g->r.draw_end >= g->height)
-			g->r.draw_end = g->height - 1;
+	if (g->r.draw_start < 0)
+		g->r.draw_start = 0;
+	g->r.draw_end = g->r.line_height / 2 + g->height / 2;
+	if (g->r.draw_end >= g->height)
+		g->r.draw_end = g->height - 1;
 	render_5(g);
 }
 
@@ -68,7 +70,8 @@ void	render_3(t_game *g)
 			g->r.map_y += g->r.step_y;
 			g->r.side = 1;
 		}
-		if (&g->map.mat[g->r.map_x][g->r.map_y] && g->map.mat[g->r.map_x][g->r.map_y] == '1')
+		if (&g->map.mat[g->r.map_x][g->r.map_y]
+			&& g->map.mat[g->r.map_x][g->r.map_y] == '1')
 			g->r.hit = 1;
 	}
 	render_4(g);
@@ -102,8 +105,10 @@ void	render_2(t_game *g)
 
 void	render_1(t_game *g)
 {
-	g->r.floor_color = g->map.rgb[0].color[0] * 65536 + g->map.rgb[0].color[1] * 256 + g->map.rgb[0].color[2];
-	g->r.ceiling_color = g->map.rgb[1].color[0] * 65536 + g->map.rgb[1].color[1] * 256 + g->map.rgb[1].color[2];
+	g->r.floor_color = g->map.rgb[0].color[0] * 65536 + g->map.rgb[0].color[1]
+		* 256 + g->map.rgb[0].color[2];
+	g->r.ceiling_color = g->map.rgb[1].color[0] * 65536 + g->map.rgb[1].color[1]
+		* 256 + g->map.rgb[1].color[2];
 	g->r.x = -1;
 	while (++g->r.x < g->width)
 	{

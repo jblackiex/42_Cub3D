@@ -42,6 +42,9 @@ void	print_error(int fd, char *str)
 void	lessgo(t_game *g)
 {
 	initializer(g);
+	print_map(g->map.mat);
+	map_flipper(g);
+	print_map(g->map.mat);
 	render_1(g);
 	mlx_hook(g->win, 2, 1L << 0, handle_keypress, g);
 	mlx_hook(g->win, 3, 1L << 1, handle_keyrelease, g);

@@ -50,16 +50,6 @@ static void	ft_mat_size(char **mat, t_mat *t)
 	t->size.y = --i;
 }
 
-static void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while(map[i])
-		printf("map[%d] = %s\n", i, map[i++]);
-
-}
-
 char	**get_map_cub(char **map, t_mat *t)
 {
 	int		i;

@@ -134,6 +134,8 @@ int			quitter(t_game *data);
 int			idle_handler(t_game *data);
 void		render_1(t_game *g);
 void		render_6(t_game *g, t_texture texture);
+void		map_flipper(t_game *g);
+void		print_map(char **map);
 t_texture	load_texture(void *mlx, char *path);
 int			handle_keypress(int keycode, t_game *data);
 int			handle_keyrelease(int keycode, t_game *data);
