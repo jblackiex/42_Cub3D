@@ -47,8 +47,8 @@ static int	ft_find_str(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == ',' || str[i] == '.' || (str[i] != '0' && str[i] != '1'
-				&& str[i] != ' ') || (str[i] == '\n' && str[i + 1] != '\0'))
+		if (str[i] == ',' || str[i] == '.' || (str[i] != '0' && str[i] != '1')
+				|| (str[i] == '\n' && str[i + 1] != '\0'))
 			if (str[i] != 'S' && str[i] != 'N' && str[i] != 'E'
 				&& str[i] != 'W')
 				return (0);

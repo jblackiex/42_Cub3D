@@ -19,7 +19,7 @@ static int	ft_char_check(t_game *g, int count, int x, int y)
 		while (g->map.mat[y] && g->map.mat[y][++x])
 		{
 			if ((g->map.mat[y][x] != 'N' && g->map.mat[y][x] != 'S'
-					&& g->map.mat[y][x] != 32 && g->map.mat[y][x] != '\t'
+					&& g->map.mat[y][x] != 32 && g->map.mat[y][x] != '	'
 					&& g->map.mat[y][x] != 'W' && g->map.mat[y][x] != 'E'
 					&& g->map.mat[y][x] != '0' && g->map.mat[y][x] != '1'
 					&& g->map.mat[y][x] != '\n')
@@ -117,6 +117,8 @@ void	check_core(char *str, t_game *var)
 	ft_mat_size(&tmp.mat[tmp.i], &tmp);
 	var->map.size.y = tmp.size.y;
 	var->map.mat = get_map_cub(tmp.mat, &tmp);
+	// print_map(var->map.mat);
+	// exit(0);
 	if (ft_char_check(var, 0, x, y))
 		flag = printf("\033[1;31mError\n Wrong elements inside map\n\033[0m");
 	x = var->s_pos.x;

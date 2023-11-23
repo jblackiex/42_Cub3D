@@ -2,10 +2,11 @@ NO ./textures/brick_azure.xpm
 SO ./textures/trump_mewing.xpm
 WE ./textures/brick_red.xpm
 EA ./textures/brick_purple.xpm
-
-F 0,128,0
 C 42,82,190
+F 0,34,6
 
+
+EA ./textures/brick_purple.xpm
 111111111111
 100000000001
 1000000000011111

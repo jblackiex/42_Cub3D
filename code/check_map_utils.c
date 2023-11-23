@@ -16,7 +16,7 @@ int	in_i(t_mat *matr, int *i)
 			while (!matr->fl && matr->mat[*i] && matr->mat[*i][0] == '\n')
 				*i += 1;
 		if (matr->mat[*i] && (!matr->mat[*i][j] || (matr->mat[*i][j] != ' '
-			&& matr->mat[*i][j] != '\t')))
+			&& matr->mat[*i][j] != '	')))
 		{
 			matr->j = j;
 			break ;
@@ -25,7 +25,7 @@ int	in_i(t_mat *matr, int *i)
 	}
 	if (!matr->mat[*i] || !(&matr->mat[*i][j]) || (!matr->fl && j && *i < 6
 		&& (matr->mat[*i][j - 1] == ' ' || matr->mat[*i][j - 1] == '	')))
-		return (printf("\033[1;31mError\n check spaces .cub file\n\033[0m"), 1);
+		return (printf("\033[1;31mError\n bad .cub file\n\033[0m"), 1);
 	return (matr->fl = 0, 0);
 }
 
