@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   matr.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nbordoni <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 15:43:33 by nbordoni          #+#    #+#             */
-/*   Updated: 2023/02/12 15:43:35 by nbordoni         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "Cub3d.h"
 
 void	ft_free_ptr(void **ptr)
@@ -31,8 +20,8 @@ char	**get_map(char *mapy)
 	fd = open(mapy, O_RDONLY);
 	if (fd == -1)
 		print_error(fd, NULL);
-	result = NULL;
 	map = ft_strdup("");
+	old_address = "test";
 	while (1)
 	{
 		holder = get_next_line(fd);
@@ -43,12 +32,10 @@ char	**get_map(char *mapy)
 		ft_free_ptr((void *)&old_address);
 		ft_free_ptr((void *)&holder);
 	}
-	if (holder)
-	{
-		result = ft_split_mod(map, '\n');
-		ft_free_ptr((void *)&map);
-	}
-	else
+	if (old_address)
 		print_error(fd, NULL);
+	result = ft_split_mod(map, '\n');
+	ft_free_ptr((void *)&map);
 	return (close(fd), result);
 }
+
