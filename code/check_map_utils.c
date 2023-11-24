@@ -10,7 +10,7 @@ int	in_i(t_mat *matr, int *i)
 		if (matr->fl)
 			j = 2;
 		while (&(matr->mat[*i][j]) && (matr->mat[*i][j] == ' '
-			|| matr->mat[*i][j] == '\t'))
+			|| matr->mat[*i][j] == '	'))
 			j++;
 		if (matr->mat[*i][j] && (&matr->mat[*i][j]) && matr->mat[*i][j] == '\n')
 			while (!matr->fl && matr->mat[*i] && matr->mat[*i][0] == '\n')

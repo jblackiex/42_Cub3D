@@ -40,24 +40,44 @@ void	initializer(t_game *data)
 	data->textures[3] = load_texture(data->mlx, data->xpm[3]);
 }
 
+void	ft_find_init(int *zero, int *one, int *space, int *other)
+{
+	*zero = 0;
+	*one = 0;
+	*space = 0;
+	*other = 0;
+}
+
 static int	ft_find_str(char *str)
 {
 	int	i;
+	int	zero;
+	int	one;
+	int	space;
+	int	other;
 
 	i = 0;
+	ft_find_init(&zero, &one, &space, &other);
 	while (str[i])
 	{
-		if (str[i] == ',' || str[i] == '.' || (str[i] != '0' && str[i] != '1')
-			|| (str[i] == '\n' && str[i + 1] != '\0'))
-			if (str[i] != 'S' && str[i] != 'N' && str[i] != 'E'
-				&& str[i] != 'W')
-				return (0);
+		if (str[i] == '0')
+			zero++;
+		else if (str[i] == '1')
+			one++;
+		else if (str[i] == ' ' || str[i] == '	')
+			space++;
+		else
+			other++;
 		i++;
 	}
-	return (1);
+	if (!other && ((zero > 0 && one > 0) || (zero > 0 && space > 0)
+			|| (one > 0 && space > 0)) || (one > 0 && !space && !zero)
+			|| (zero > 0 && !space && !one))
+		return (1);
+	return (0);
 }
 
-int	not_set(char *c, char **set, int flag, int k)
+int	not_set(char *c, char **set, int flag)
 {
 	int	i;
 
@@ -106,7 +126,7 @@ void	order_map(t_mat *tmp, t_mat *matr)
 
 	j = 0;
 	i = -1;
-	not_set(matr->mat[0], set, 1, 0);
+	not_set(matr->mat[0], set, 1);
 	tmp->mat = (char **) ft_calloc(matr->size.y + 2, sizeof(char *));
 	while (matr->mat[++i])
 	{
@@ -119,32 +139,13 @@ void	order_map(t_mat *tmp, t_mat *matr)
 				i = 0;
 			}
 		}
-		else if (j > 5 && not_set(matr->mat[i], set, 0, i))
+		else if (j > 5 && (not_set(matr->mat[i], set, 0) ||
+				(i > 5 && (ft_find_str(matr->mat[i - 1])
+				|| (matr->mat[i + 1] && ft_find_str(matr->mat[i + 1]))))))
 			tmp->mat[j++] = ft_strdup(matr->mat[i]);
 	}
 	// ft_free_mat(set) ? tmp->mat[j] = NULL : 0;
 	tmp->mat[j] = NULL;
-	// print_map(tmp->mat);
-	// exit(0);
-}
-
-int	quitter(t_game *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		mlx_destroy_image(data->mlx, data->textures[i].img);
-		mlx_destroy_image(data->mlx, data->textures[i].addr);
-	}
-	// free(data->textures);
-	mlx_destroy_window(data->mlx, data->win);
-	// free(data->xpm);
-	free(data->win);
-	free(data->mlx);
-	ft_free_mat(data->xpm);
-	ft_free_mat(data->map.mat);
+	print_map(tmp->mat);
 	exit(0);
-	return (0);
 }

@@ -28,7 +28,7 @@ static int	null_check(char **temp, t_vector pos, t_vector *size)
 static void	ft_find(char **temp, t_vector *size, t_vector pos)
 {
 	if (null_check(temp, pos, size) || temp[pos.y][pos.x] == ' '
-		|| temp[pos.y][pos.x] == '\t' || temp[pos.y][pos.x] == '\n')
+		|| temp[pos.y][pos.x] == '	' || temp[pos.y][pos.x] == '\n')
 	{
 		size->flag = 1;
 		return ;

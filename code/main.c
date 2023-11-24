@@ -54,6 +54,28 @@ void	lessgo(t_game *g)
 	quitter(g);
 }
 
+
+int	quitter(t_game *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		mlx_destroy_image(data->mlx, data->textures[i].img);
+		mlx_destroy_image(data->mlx, data->textures[i].addr);
+	}
+	// free(data->textures);
+	mlx_destroy_window(data->mlx, data->win);
+	// free(data->xpm);
+	free(data->win);
+	free(data->mlx);
+	ft_free_mat(data->xpm);
+	ft_free_mat(data->map.mat);
+	exit(0);
+	return (0);
+}
+
 //TODO
 
 //file da aggiungere: main, check_matr.c, check_cub.c, utils.c, check_map_utils.c
@@ -73,8 +95,8 @@ int	main(int ac, char **av)
 	if (check_extention(av[1], ".cub"))
 		return (1);
 	check_core(av[1], &var);
-	lessgo(&var);
-	// printf("YOU DID IT\n");
+	// lessgo(&var);
+	printf("YOU DID IT\n");
 	// ft_free_mat(var.map.mat);
 	return (0);
 }
