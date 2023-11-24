@@ -15,17 +15,17 @@ void	initializer(t_game *data)
 {
 	data->width = 1200;
 	data->height = 800;
-	data->p_x = (float)data->s_pos.y + 0.5;
-	data->p_y = ft_strlen(data->map.mat[(int)data->p_x]) - (float)data->s_pos.x + 0.5; //da sistemare, devo inizializzare pos giocatore appena flippo
+	// data->p_x = (float)data->s_pos.y + 0.5;
+	// data->p_y = (float)data->s_pos.x + 0.5;
 	data->fov = 35 * (M_PI / 180);
 	if (data->orientation == 'N')
 		data->p_angle = M_PI;
 	else if (data->orientation == 'E')
-		data->p_angle = 0.5 * M_PI;
+		data->p_angle = 1.5 * M_PI;
 	else if (data->orientation == 'S')
 		data->p_angle = 0;
 	else if (data->orientation == 'W')
-		data->p_angle = 1.5 * M_PI;
+		data->p_angle = 0.5 * M_PI;
 	data->move_up = 0;
 	data->move_down = 0;
 	data->move_left = 0;
@@ -146,4 +146,26 @@ void	order_map(t_mat *tmp, t_mat *matr)
 	tmp->mat[j] = NULL;
 	// print_map(tmp->mat);
 	// exit(0);
+}
+
+void	find_player(t_game *g)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < g->map.size.y)
+	{
+		x = -1;
+		while (g->map.mat[y] && g->map.mat[y][++x])
+		{
+			if (g->map.mat[y][x] == 'N' || g->map.mat[y][x] == 'S' ||
+				g->map.mat[y][x] == 'W' || g->map.mat[y][x] == 'E')
+			{
+				g->p_x = (float)y + 0.5;
+				g->p_y = (float)x + 0.5;
+				break ;
+			}
+		}
+	}
 }

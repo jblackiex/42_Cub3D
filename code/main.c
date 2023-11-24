@@ -95,8 +95,8 @@ int	main(int ac, char **av)
 	if (check_extention(av[1], ".cub"))
 		return (1);
 	check_core(av[1], &var);
-	// lessgo(&var);
-	printf("YOU DID IT\n");
+	lessgo(&var);
+	// printf("YOU DID IT\n");
 	// ft_free_mat(var.map.mat);
 	return (0);
 }

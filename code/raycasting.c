@@ -18,16 +18,16 @@ void	render_5(t_game *g)
 	if (g->r.side == 1)
 	{
 		if (g->r.ray_dir_y < 0)
-			texture = g->textures[2];
-		else
 			texture = g->textures[3];
+		else
+			texture = g->textures[2];
 	}
 	else
 	{
 		if (g->r.ray_dir_x < 0)
-			texture = g->textures[1];
-		else
 			texture = g->textures[0];
+		else
+			texture = g->textures[1];
 	}
 	if (g->r.side == 0)
 		g->r.wall_x = g->p_y + g->r.perp_wall_dist * g->r.ray_dir_y;

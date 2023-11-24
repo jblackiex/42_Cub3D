@@ -40,10 +40,10 @@ void	row_filler(t_game *g, int len)
 		j = -1;
 		while (++j < len)
 		{
-			if (j < ft_strlen(g->map.mat[i]))
+			if (j < ft_strlen(g->map.mat[i]) && g->map.mat[i][j] != ' ' && g->map.mat[i][j] != '\t')
 				temp[j] = g->map.mat[i][j];
 			else
-				temp[j] = ' ';
+				temp[j] = '1';
 		}
 		temp[len] = '\0';
 		free(g->map.mat[i]);
@@ -73,6 +73,7 @@ void	map_flipper(t_game *g)
 			g->map.mat[i][len - (j + 1)] = c;
 		}
 	}
+	find_player(g);
 }
 
 t_texture	load_texture(void *mlx, char *path)

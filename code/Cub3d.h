@@ -124,6 +124,7 @@ char	**get_map_cub(char **map, t_mat *t);
 int		ft_flood_fill(char **tab, t_vector *size, t_vector begin);
 int		ft_path_check(t_game *g, t_mat *var);
 void	order_map(t_mat *tmp, t_mat *matr);
+void	find_player(t_game *g);
 
 //Raycasting
 void		initializer(t_game *data);
