@@ -15,7 +15,7 @@ void	print_error(int fd, char *str)
 {
 	if (!str)
 	{
-		printf("\033[1;31mError\n Empty .cub, file not found\n\033[0m");
+		printf("\033[1;31mError\n Empty .cub or file not found\n\033[0m");
 		close(fd);
 		exit(1);
 	}

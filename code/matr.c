@@ -31,6 +31,7 @@ char	**get_map(char *mapy)
 	fd = open(mapy, O_RDONLY);
 	if (fd == -1)
 		print_error(fd, NULL);
+	result = NULL;
 	map = ft_strdup("");
 	while (1)
 	{
@@ -42,8 +43,12 @@ char	**get_map(char *mapy)
 		ft_free_ptr((void *)&old_address);
 		ft_free_ptr((void *)&holder);
 	}
-
-	result = ft_split_mod(map, '\n');
-	ft_free_ptr((void *)&map);
+	if (holder)
+	{
+		result = ft_split_mod(map, '\n');
+		ft_free_ptr((void *)&map);
+	}
+	else
+		print_error(fd, NULL);
 	return (close(fd), result);
 }

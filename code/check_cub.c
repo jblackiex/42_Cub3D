@@ -70,7 +70,7 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 		buff = i;
 		while (matr->mat[j][i] && matr->mat[j][i] != ',' && ++count)
 			i++;
-		if (++comma && count > 3)
+		if (++comma && (count > 3 || matr->mat[j][i] == ' ')) // MOD
 			++flag;
 		if (comma > 3 || (matr->mat[j][buff] == '0'
 			&& (matr->mat[j][buff + 1] && matr->mat[j][buff + 1] != ',')))

@@ -144,6 +144,6 @@ void	order_map(t_mat *tmp, t_mat *matr)
 	}
 	// ft_free_mat(set) ? tmp->mat[j] = NULL : 0;
 	tmp->mat[j] = NULL;
-	print_map(tmp->mat);
-	exit(0);
+	// print_map(tmp->mat);
+	// exit(0);
 }

@@ -60,12 +60,6 @@ char	**get_map_cub(char **map, t_mat *t)
 	j = 0;
 	while (map[i] && i < t->i)
 		i++;
-	if (!map[i])
-	{
-		printf("Error\n No map inside .cub file\n");
-		ft_free_mat(map); // funzione freea tutto
-		exit (1);
-	}
 	map_real = (char **) ft_calloc(t->size.y + 2, sizeof(char *));
 	while (map[i])
 		map_real[j++] = ft_strdup(map[i++]);
@@ -110,7 +104,7 @@ void	check_core(char *str, t_game *var)
 	// print_map(var->map.mat);
 	// exit(0);
 	if (ft_char_check(var, 0, x, y))
-		flag = printf("\033[1;31mError\n Wrong elements inside map\n\033[0m");
+		flag = printf("\033[1;31mError\n Wrong elements inside .cub\n\033[0m");
 	x = var->s_pos.x;
 	y = var->s_pos.y;
 	if (!flag && ft_path_check(var, &tmp))
