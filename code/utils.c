@@ -102,8 +102,6 @@ int	not_set(char *c, char **set, int flag)
 		if ((i < 4 && !ft_strncmp(set[i], c, 3))
 				|| (i >= 4 && !ft_strncmp(set[i], c, 2)))
 			return (0);
-			// if (!ft_find_str(&c[k - 1])
-			// 		&& (&c[k + 1] && !ft_find_str(&c[k + 1])))
 	}
 	return (1);
 }
@@ -136,7 +134,7 @@ void	order_map(t_mat *tmp, t_mat *matr)
 					&& (matr->mat[i + 1] && !ft_find_str(matr->mat[i + 1]))))
 			{
 				tmp->mat[j++] = ft_strdup(matr->mat[i]);
-				i = 0;
+				i = -1;
 			}
 		}
 		else if (j > 5 && (not_set(matr->mat[i], set, 0) ||
