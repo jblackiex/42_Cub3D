@@ -1,8 +1,30 @@
 #include "Cub3d.h"
 
+int	split_32(char *str, char **buffer) 
+{
+	int	i;
+	int	tmp;
+
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '	')
+		i++;
+	tmp = i;
+	while (str[tmp])
+	{
+		if (str[tmp] != ' ' && str[tmp] != '	')
+			return (0);
+		tmp++;
+	}
+	*buffer = ft_substr(str, 0, i);
+	if (!(*buffer))
+		return (0);
+	return (1);
+}
+
 bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 {
 	int			fd;
+	char		*buffer;
 	int			flag;
 	char		buff;
 	static int	xpm;
@@ -10,23 +32,23 @@ bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 	flag = 0;
 	if (check_extention(&matr->mat[i][matr->j], ".xpm"))
 		++flag;
-	if (!flag)
+	if (!flag && (split_32(&matr->mat[i][matr->j], &buffer) || !(++flag)))
 	{
-		fd = open(&matr->mat[i][matr->j], O_RDONLY);
+		fd = open(buffer, O_RDONLY);
 		if (fd < 0 && close(fd))
 			return (printf("\033[1;31mError\n .xpm not found\n\033[0m"), 1);
 		flag = read(fd, &buff, 1);
 		close(fd);
 		if (flag <= 0)
 			return (printf("\033[1;31mError\n .xpm empty\n\033[0m"), 1);
-		var->xpm[xpm++] = ft_strdup(&matr->mat[i][matr->j]); // da freeare
+		var->xpm[xpm++] = buffer; // da freeare
 	}
 	else if (flag)
 		return (1);
 	return (0);
 }
 
-bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
+bool	check_rgb_save(t_mat *m, int j, int bf, int count)
 {
 	char		*buffer;
 	int			flag;
@@ -34,25 +56,25 @@ bool	check_rgb_save(t_mat *matr, int j, int buff, int count)
 	static int	rgb;
 
 	flag = 0;
-	if (rgb == 3 && ++matr->k)
+	if (rgb == 3 && ++m->k)
 		rgb = 0;
-	buffer = ft_substr(&matr->mat[j][buff], 0, count);
-	if (--buff && !buffer)
+	if (!split_32(&m->mat[j][bf--], &buffer))
 		return (1);
-	while (!flag && matr->mat[j][++buff] && matr->mat[j][buff] != ',')
-		if (!ft_isdigit(matr->mat[j][buff]))
+	m->r = ft_substr(buffer, 0, count);
+	count = ft_strlen(m->r);
+	while (!flag && m->mat[j][++bf] && m->mat[j][bf] != ',')
+		if ((rgb < 2 || count-- > 0) && !ft_isdigit(m->mat[j][bf]))
 			flag = 1;
-	num = ft_atoi(buffer);
+	num = ft_atoi(m->r);
 	if (!flag && (num < 0 || num > 255))
 		++flag;
+	else if (!flag && !m->k)
+			m->rgb[0].color[rgb++] = num;
 	else if (!flag)
-		if (!matr->k)
-			matr->rgb[0].color[rgb++] = num;
-		else
-			matr->rgb[1].color[rgb++] = num;
+			m->rgb[1].color[rgb++] = num;
 	if (flag)
-		return (free(buffer), 1);
-	return (free(buffer), 0);
+		return (free(m->r), 1);
+	return (free(m->r), 0);
 }
 
 bool	check_rgb_trio(t_mat *matr, int j, int i)
@@ -70,7 +92,7 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 		buff = i;
 		while (matr->mat[j][i] && matr->mat[j][i] != ',' && ++count)
 			i++;
-		if (++comma && (count > 3 || matr->mat[j][i] == ' ')) // MOD
+		if (++comma && (comma < 2 && count > 3)) // MOD
 			++flag;
 		if (comma > 3 || (matr->mat[j][buff] == '0'
 			&& (matr->mat[j][buff + 1] && matr->mat[j][buff + 1] != ',')))
@@ -84,26 +106,26 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 	return (0);
 }
 
-bool	check_cub_rgb(t_mat *matr, int *i)
+bool	check_cub_rgb(t_mat *m, int *i)
 {
 	int	f;
-	int	tmp;
+	int	t;
 
 	f = 0;
-	tmp = *i + 1;
-	matr->k = 0;
-	if (ft_strncmp(matr->mat[*i], "F ", 2) && ++f)
+	t = *i + 1;
+	m->k = 0;
+	if (ft_strncmp(m->mat[*i], "F ", 2) && ++f)
 		print_error(0, "F ");
-	if ((in_i(matr, &tmp) || ft_strncmp(matr->mat[tmp], "C ", 2)) && ++f)
+	if (!f && (in_i(m, &t) || ft_strncmp(m->mat[t], "C ", 2)) && ++f)
 		print_error(0, "C ");
-	++matr->fl;
-	if (!f && ((in_i(matr, i) || check_rgb_trio(matr, *i, matr->j - 1)
-				|| !(++(*i)) || in_i(matr, i)) || !(++matr->fl) || in_i(matr, i)
-			|| check_rgb_trio(matr, *i, matr->j - 1)))
+	++m->fl;
+	if (!f && ((in_i(m, i) || check_rgb_trio(m, *i, m->j - 1)
+				|| !(++(*i)) || in_i(m, i)) || !(++m->fl) || in_i(m, i)
+			|| check_rgb_trio(m, *i, m->j - 1)))
 		++f;
-	if (f || !(++(*i)) || in_i(matr, i))
+	if (f || !(++(*i)) || in_i(m, i))
 		return (1);
-	matr->i = *i;
+	m->i = *i;
 	return (0);
 }
 
@@ -120,11 +142,11 @@ void	check_cub_core(t_mat *matr, t_game *var, t_mat *cub)
 	tmp = i;
 	if (ft_strncmp(matr->mat[i++], "NO ", 3) && ++f)
 		print_error(0, "NO ");
-	if (!f && (in_i(matr, &i) || ft_strncmp(matr->mat[i++], "SO ", 3) && ++f))
+	if (!f && ((in_i(matr, &i) || ft_strncmp(matr->mat[i++], "SO ", 3)) && ++f))
 		print_error(0, "SO ");
-	if (!f && (in_i(matr, &i) || ft_strncmp(matr->mat[i++], "WE ", 3)) && ++f)
+	if (!f && ((in_i(matr, &i) || ft_strncmp(matr->mat[i++], "WE ", 3)) && ++f))
 		print_error(0, "WE ");
-	if (!f && (in_i(matr, &i) || ft_strncmp(matr->mat[i++], "EA ", 3)) && ++f)
+	if (!f && ((in_i(matr, &i) || ft_strncmp(matr->mat[i++], "EA ", 3)) && ++f))
 		print_error(0, "EA ");
 	i = tmp;
 	tmp = -1;

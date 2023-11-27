@@ -116,6 +116,22 @@ void	print_map(char **map)
 
 }
 
+int	in_order(char *str, char **set, int j, t_mat *matr)
+{
+	char		*tmp;
+
+	int i = 0;
+	tmp = str;
+	while (*tmp && (*tmp == ' ' || *tmp == '	') && ++i)
+		tmp++;
+	if (j == -1)
+		return (not_set(tmp, set, 0));
+	if (!ft_strncmp(set[j], tmp, 2))
+		return (matr->buff = tmp, 1);
+	return (0);
+}
+
+
 void	order_map(t_mat *tmp, t_mat *matr)
 {
 	int		i;
@@ -128,18 +144,19 @@ void	order_map(t_mat *tmp, t_mat *matr)
 	tmp->mat = (char **) ft_calloc(matr->size.y + 2, sizeof(char *));
 	while (matr->mat[++i])
 	{
-		if (j < 6 && !ft_strncmp(set[j], matr->mat[i], 2))
+		if (j < 6 && in_order(&matr->mat[i][0], set, j, matr))
 		{
 			if (i < 6 || (!ft_find_str(matr->mat[i - 1])
 					&& (matr->mat[i + 1] && !ft_find_str(matr->mat[i + 1]))))
 			{
-				tmp->mat[j++] = ft_strdup(matr->mat[i]);
+				tmp->mat[j++] = ft_strdup(matr->buff);
+				printf("tmp->mat[%d] = %s\n", j - 1, tmp->mat[j - 1]);
 				i = -1;
 			}
 		}
-		else if (j > 5 && (not_set(matr->mat[i], set, 0) ||
+		else if (j > 5 && in_order(&matr->mat[i][0], set, -1, matr) ||
 				(i > 5 && (ft_find_str(matr->mat[i - 1])
-				|| (matr->mat[i + 1] && ft_find_str(matr->mat[i + 1]))))))
+				|| (matr->mat[i + 1] && ft_find_str(matr->mat[i + 1])))))
 			tmp->mat[j++] = ft_strdup(matr->mat[i]);
 	}
 	// ft_free_mat(set) ? tmp->mat[j] = NULL : 0;

@@ -53,8 +53,21 @@ int	ft_free_mat(char **mat)
 	return (1);
 }
 
+char	*point_xpm(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str) - 1;
+	while (str[i] == ' ' || str[i] == '	')
+		i--;
+	if (str[i] == 'm' && ft_strncmp(&str[i - 4], ".xpm", 4))
+		i -= 3;
+	return (&str[i]);
+}
+
 bool	check_extention(char *str, char *doc_cub)
 {
+	char	*buffer;
 	if (!ft_strncmp(doc_cub, ".cub", 4))
 	{
 		if (ft_strncmp(&str[ft_strlen(str) - 4], doc_cub, 4)
@@ -63,8 +76,8 @@ bool	check_extention(char *str, char *doc_cub)
 	}
 	else if (!ft_strncmp(doc_cub, ".xpm", 4))
 	{
-		if (ft_strncmp(&str[ft_strlen(str) - 4], doc_cub, 4)
-			|| str[ft_strlen(str) - 1] != 'm')
+		buffer = point_xpm(str);
+		if (ft_strncmp(buffer, doc_cub, 4))
 			return (print_error(0, ".xpm"), 1);
 	}
 	return (0);
