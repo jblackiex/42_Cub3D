@@ -66,7 +66,7 @@ bool	check_rgb_save(t_mat *m, int j, int bf, int count)
 		if ((rgb < 2 || count-- > 0) && !ft_isdigit(m->mat[j][bf]))
 			flag = 1;
 	num = ft_atoi(m->r);
-	if (!flag && (num < 0 || num > 255))
+	if (!flag && (num < 0 || num > 255 || !ft_strlen(m->r)))
 		++flag;
 	else if (!flag && !m->k)
 			m->rgb[0].color[rgb++] = num;
@@ -92,7 +92,7 @@ bool	check_rgb_trio(t_mat *matr, int j, int i)
 		buff = i;
 		while (matr->mat[j][i] && matr->mat[j][i] != ',' && ++count)
 			i++;
-		if (++comma && (comma < 2 && count > 3)) // MOD
+		if (++comma && (comma < 2 && count > 3))
 			++flag;
 		if (comma > 3 || (matr->mat[j][buff] == '0'
 			&& (matr->mat[j][buff + 1] && matr->mat[j][buff + 1] != ',')))

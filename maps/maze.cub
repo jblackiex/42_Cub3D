@@ -6,7 +6,7 @@
 
 
 
-            C 42,82, 
+            C 42,82,2
 SO   ./textures/brick_azure.xpm   
     EA    ./textures/brick_azure.xpm
 
