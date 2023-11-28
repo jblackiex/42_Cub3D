@@ -101,8 +101,6 @@ void	check_core(char *str, t_game *var)
 	ft_mat_size(&tmp.mat[tmp.i], &tmp);
 	var->map.size.y = tmp.size.y;
 	var->map.mat = get_map_cub(tmp.mat, &tmp);
-	// print_map(var->map.mat);
-	// exit(0);
 	if (ft_char_check(var, 0, x, y))
 		flag = printf("\033[1;31mError\n Wrong elements inside .cub\n\033[0m");
 	x = var->s_pos.x;
@@ -110,6 +108,6 @@ void	check_core(char *str, t_game *var)
 	if (!flag && ft_path_check(var, &tmp))
 		flag = printf("\033[1;31m Check map inside .cub file\n\033[0m");
 	if (ft_free_mat(tmp.mat) && ft_free_mat(matr.mat) && copy_rgb(var, &tmp)
-		&& flag && ft_free_mat(var->map.mat))
+		&& flag && ft_free_set(var->xpm, 4) && ft_free_mat(var->map.mat))
 		exit(1);
 }

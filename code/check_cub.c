@@ -35,8 +35,8 @@ bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 	if (!flag && (split_32(&matr->mat[i][matr->j], &buffer) || !(++flag)))
 	{
 		fd = open(buffer, O_RDONLY);
-		if (fd < 0 && close(fd))
-			return (printf("\033[1;31mError\n .xpm not found\n\033[0m"), 1);
+		if (fd < 0)
+			return (printf("\033[1;31m No .xpm! \n\033[0m"), free(buffer), 1);
 		flag = read(fd, &buff, 1);
 		close(fd);
 		if (flag <= 0)
@@ -73,8 +73,8 @@ bool	check_rgb_save(t_mat *m, int j, int bf, int count)
 	else if (!flag)
 			m->rgb[1].color[rgb++] = num;
 	if (flag)
-		return (free(m->r), 1);
-	return (free(m->r), 0);
+		return (free(m->r), free(buffer), 1);
+	return (free(m->r), free(buffer), 0);
 }
 
 bool	check_rgb_trio(t_mat *matr, int j, int i)
@@ -131,12 +131,11 @@ bool	check_cub_rgb(t_mat *m, int *i)
 
 void	check_cub_core(t_mat *matr, t_game *var, t_mat *cub)
 {
-	int	f;
-	int	i;
-	int	tmp;
+	int			f;
+	static int	i;
+	int			tmp;
 
 	f = 0;
-	i = 0;
 	order_map(matr, cub);
 	in_i(matr, &i);
 	tmp = i;
@@ -154,6 +153,7 @@ void	check_cub_core(t_mat *matr, t_game *var, t_mat *cub)
 		if (in_i(matr, &i) || check_cub_xpm(matr, i, var) || !(++i)
 			|| in_i(matr, &i))
 			++f;
-	if (((!f && check_cub_rgb(matr, &i)) || f) && ft_free_mat(matr->mat))
+	if (((!f && check_cub_rgb(matr, &i)) || f) && ft_free_mat(cub->mat)
+		&& ft_free_set(var->xpm, tmp) && ft_free_mat(matr->mat))
 		exit (1);
 }

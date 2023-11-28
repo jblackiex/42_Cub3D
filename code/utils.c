@@ -93,8 +93,6 @@ int	not_set(char *c, char **set, int flag)
 		set[6] = "\0";
 		return (0);
 	}
-	// if (c[0] == '0' || c[0] == '1')
-	// 	return (1);
 	while (set[++i])
 	{
 		if (set[i][0] == '\0')
@@ -131,14 +129,22 @@ int	in_order(char *str, char **set, int j, t_mat *matr)
 	return (0);
 }
 
-
-void	order_map(t_mat *tmp, t_mat *matr)
+int	ft_free_set(char **mat, int dim)
 {
-	int		i;
-	int		j;
-	char	*set[7]; // freeare
+	int	y;
 
-	j = 0;
+	y = -1;
+	while (++y < dim)
+		free(mat[y]);
+	return (1);
+}
+
+int	order_map(t_mat *tmp, t_mat *matr)
+{
+	int			i;
+	static int	j;
+	char		*set[7];
+
 	i = -1;
 	not_set(matr->mat[0], set, 1);
 	tmp->mat = (char **) ft_calloc(matr->size.y + 2, sizeof(char *));
@@ -150,7 +156,6 @@ void	order_map(t_mat *tmp, t_mat *matr)
 					&& (matr->mat[i + 1] && !ft_find_str(matr->mat[i + 1]))))
 			{
 				tmp->mat[j++] = ft_strdup(matr->buff);
-				printf("tmp->mat[%d] = %s\n", j - 1, tmp->mat[j - 1]);
 				i = -1;
 			}
 		}
@@ -159,10 +164,7 @@ void	order_map(t_mat *tmp, t_mat *matr)
 				|| (matr->mat[i + 1] && ft_find_str(matr->mat[i + 1])))))
 			tmp->mat[j++] = ft_strdup(matr->mat[i]);
 	}
-	// ft_free_mat(set) ? tmp->mat[j] = NULL : 0;
-	tmp->mat[j] = NULL;
-	// print_map(tmp->mat);
-	// exit(0);
+	return (ft_free_set(set, 6), tmp->mat[j] = NULL, 0);
 }
 
 void	find_player(t_game *g)

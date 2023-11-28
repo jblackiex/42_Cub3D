@@ -59,7 +59,7 @@ int	quitter(t_game *data)
 	// free(data->xpm);
 	free(data->win);
 	free(data->mlx);
-	ft_free_mat(data->xpm);
+	ft_free_set(data->xpm, 4);
 	ft_free_mat(data->map.mat);
 	exit(0);
 	return (0);
@@ -84,8 +84,9 @@ int	main(int ac, char **av)
 	if (check_extention(av[1], ".cub"))
 		return (1);
 	check_core(av[1], &var);
-	lessgo(&var);
-	// printf("YOU DID IT\n");
-	// ft_free_mat(var.map.mat);
+	// lessgo(&var);
+	printf("YOU DID IT\n");
+	ft_free_set(var.xpm, 4);
+	ft_free_mat(var.map.mat);
 	return (0);
 }

@@ -1,12 +1,16 @@
-WE ./textures/brick_azure.xpm
-NO ./textures/trump_mewing.xpm
-C 42,82,190
-SO ./textures/brick_azure.xpm
-EA ./textures/brick_azure.xpm
 
 
-            
-F 0,255,3
+   WE ./textures/brick_azure.xpm
+  NO ./textures/trump_mewing.xpm
+
+
+
+
+            C 42,82, 
+SO   ./textures/brick_azure.xpm   
+    EA    ./textures/brick_azure.xpm
+
+      
 
 
 

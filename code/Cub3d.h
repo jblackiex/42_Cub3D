@@ -104,18 +104,19 @@ typedef struct s_game
 }		t_game;
 
 // Parsing Map
-void	check_cub_core(t_mat *matr, t_game *var, t_mat *cub);
-int		in_i(t_mat *matr, int *i);
-void	check_core(char *path, t_game *p);
-void	print_error(int fd, char *str);
-char	**get_map(char *mapy);
-bool	check_cub_rgb(t_mat *matr, int *i);
-bool	check_extention(char *str, char *doc_cub);
-char	**get_map_cub(char **map, t_mat *t);
-int		ft_flood_fill(char **tab, t_vector *size, t_vector begin);
-int		ft_path_check(t_game *g, t_mat *var);
-void	order_map(t_mat *tmp, t_mat *matr);
-void	find_player(t_game *g);
+void		check_cub_core(t_mat *matr, t_game *var, t_mat *cub);
+int			in_i(t_mat *matr, int *i);
+void		check_core(char *path, t_game *p);
+void		print_error(int fd, char *str);
+char		**get_map(char *mapy);
+bool		check_cub_rgb(t_mat *matr, int *i);
+bool		check_extention(char *str, char *doc_cub);
+char		**get_map_cub(char **map, t_mat *t);
+int			ft_flood_fill(char **tab, t_vector *size, t_vector begin);
+int			ft_path_check(t_game *g, t_mat *var);
+int			order_map(t_mat *tmp, t_mat *matr);
+void		find_player(t_game *g);
+int			ft_free_set(char **mat, int dim);
 
 //Raycasting
 void		initializer(t_game *data);
@@ -132,7 +133,7 @@ t_texture	load_texture(void *mlx, char *path);
 int			handle_keypress(int keycode, t_game *data);
 int			handle_keyrelease(int keycode, t_game *data);
 
-int		ft_close_game(t_game *g);
-int		ft_free_mat(char **mat);
+int			ft_close_game(t_game *g);
+int			ft_free_mat(char **mat);
 
 #endif
