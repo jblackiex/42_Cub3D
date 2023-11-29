@@ -45,9 +45,10 @@ void	row_filler(t_game *g, int len)
 			else
 				temp[j] = '1';
 		}
+		temp[0] = '1';
+		temp[len - 1] = '1';
 		temp[len] = '\0';
 		free(g->map.mat[i]);
-		g->map.mat[i] = NULL;
 		g->map.mat[i] = temp;
 	}
 }
@@ -60,11 +61,10 @@ void	map_flipper(t_game *g)
 	char	c;
 
 	len = search_longest(g);
-	printf("len = %d\n", len);
 	i = -1;
+	row_filler(g, len);
 	while (g->map.mat[++i])
 	{
-		row_filler(g, len);
 		j = -1;
 		while (++j <= len / 2)
 		{

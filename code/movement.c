@@ -16,8 +16,8 @@ int	idle_handler(t_game *data)
 	float	move_speed;
 	float	rotation_speed;
 
-	move_speed = 0.15;
-	rotation_speed = 0.08;
+	move_speed = 0.1;
+	rotation_speed = 0.1;
 	if (data->move_up)
 		move_player(data, move_speed * cos(data->p_angle), move_speed
 			* sin(data->p_angle));
@@ -39,12 +39,56 @@ int	idle_handler(t_game *data)
 	return (0);
 }
 
-void	move_player(t_game *data, float dx, float dy)
+int	check_x_positive(t_game *g, float dx, float dy)
 {
-	if (data->map.mat[(int)(data->p_x + dx)][(int)(data->p_y + dy)] != '1')
+	if(dx > 0)
 	{
-		data->p_x += dx;
-		data->p_y += dy;
+		if (dy > 0)
+		{
+			if ((g->map.mat[(int)roundf(g->p_x + 1)][(int)roundf(g->p_y)] == '1')
+				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y + 1)] == '1'))
+				return (0);
+		}
+		else
+		{
+			if ((g->map.mat[(int)roundf(g->p_x + 1)][(int)roundf(g->p_y)] == '1')
+				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y - 1)] == '1'))
+				return (0);
+		}
+	}
+	return (1);
+}
+
+int	check_x_negative(t_game *g, float dx, float dy)
+{
+	if (dx < 0)
+	{
+		if (dy > 0)
+		{
+			if ((g->map.mat[(int)roundf(g->p_x - 1)][(int)roundf(g->p_y)] == '1')
+				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y - 1)] == '1'))
+				return (0);
+		}
+		else
+		{
+			if ((g->map.mat[(int)roundf(g->p_x - 1)][(int)roundf(g->p_y)] == '1')
+				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y + 1)] == '1'))
+				return (0);
+		}
+	}
+	return (1);
+}
+
+void	move_player(t_game *g, float dx, float dy)
+{
+	if ((g->map.mat[(int)floorf(g->p_x + dx)][(int)floorf(g->p_y + dy)]
+		== g->map.mat[(int)floorf(g->p_x)][(int)floorf(g->p_y)]) ||
+		(g->map.mat[(int)(g->p_x + dx)][(int)(g->p_y + dy)] != '1'
+		&& g->map.mat[(int)(g->p_x + dx)][(int)(g->p_y + dy)] != '\0'
+		&& check_x_positive(g, dx, dy) && check_x_negative(g, dx, dy)))
+	{
+		g->p_x += dx;
+		g->p_y += dy;
 	}
 }
 

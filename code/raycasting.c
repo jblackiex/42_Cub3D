@@ -71,7 +71,8 @@ void	render_3(t_game *g)
 			g->r.side = 1;
 		}
 		if (&g->map.mat[g->r.map_x][g->r.map_y]
-			&& g->map.mat[g->r.map_x][g->r.map_y] == '1')
+			&& (g->map.mat[g->r.map_x][g->r.map_y] == '1'
+			|| g->map.mat[g->r.map_x][g->r.map_y] == '\0'))
 			g->r.hit = 1;
 	}
 	render_4(g);
