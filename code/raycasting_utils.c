@@ -39,7 +39,8 @@ void	row_filler(t_game *g, int len)
 		j = -1;
 		while (++j < len)
 		{
-			if (j < ft_strlen(g->map.mat[i]) && g->map.mat[i][j] != ' ' && g->map.mat[i][j] != '\t')
+			if (j < ft_strlen(g->map.mat[i]) && g->map.mat[i][j] != ' '
+				&& g->map.mat[i][j] != '\t')
 				temp[j] = g->map.mat[i][j];
 			else
 				temp[j] = '1';

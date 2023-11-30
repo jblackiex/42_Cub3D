@@ -9,7 +9,6 @@
 /*   Updated: 2023/02/12 14:51:21 by nbordoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stddef.h>
@@ -27,7 +26,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}t_list;
+}	t_list;
 
 //libft//
 

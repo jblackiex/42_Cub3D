@@ -11,48 +11,20 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
-int	idle_handler(t_game *data)
-{
-	float	move_speed;
-	float	rotation_speed;
-
-	move_speed = 0.1;
-	rotation_speed = 0.1;
-	if (data->move_up)
-		move_player(data, move_speed * cos(data->p_angle), move_speed
-			* sin(data->p_angle));
-	if (data->move_down)
-		move_player(data, -move_speed * cos(data->p_angle), -move_speed
-			* sin(data->p_angle));
-	if (data->move_left)
-		move_player(data, move_speed * sin(data->p_angle), -move_speed
-			* cos(data->p_angle));
-	if (data->move_right)
-		move_player(data, -move_speed * sin(data->p_angle), move_speed
-			* cos(data->p_angle));
-	if (data->turn_left)
-		rotate_player(data, -rotation_speed);
-	if (data->turn_right)
-		rotate_player(data, rotation_speed);
-	render_1(data);
-	usleep(16666);
-	return (0);
-}
-
 int	check_x_positive(t_game *g, float dx, float dy)
 {
-	if(dx > 0)
+	if (dx > 0)
 	{
 		if (dy > 0)
 		{
-			if ((g->map.mat[(int)roundf(g->p_x + 1)][(int)roundf(g->p_y)] == '1')
-				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y + 1)] == '1'))
+			if ((g->map.mat[(int)(g->p_x + 1)][(int)(g->p_y)] == '1')
+				&& (g->map.mat[(int)(g->p_x)][(int)(g->p_y + 1)] == '1'))
 				return (0);
 		}
 		else
 		{
-			if ((g->map.mat[(int)roundf(g->p_x + 1)][(int)roundf(g->p_y)] == '1')
-				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y - 1)] == '1'))
+			if ((g->map.mat[(int)(g->p_x + 1)][(int)(g->p_y)] == '1')
+				&& (g->map.mat[(int)(g->p_x)][(int)(g->p_y - 1)] == '1'))
 				return (0);
 		}
 	}
@@ -65,14 +37,14 @@ int	check_x_negative(t_game *g, float dx, float dy)
 	{
 		if (dy > 0)
 		{
-			if ((g->map.mat[(int)roundf(g->p_x - 1)][(int)roundf(g->p_y)] == '1')
-				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y - 1)] == '1'))
+			if ((g->map.mat[(int)(g->p_x - 1)][(int)(g->p_y)] == '1')
+				&& (g->map.mat[(int)(g->p_x)][(int)(g->p_y - 1)] == '1'))
 				return (0);
 		}
 		else
 		{
-			if ((g->map.mat[(int)roundf(g->p_x - 1)][(int)roundf(g->p_y)] == '1')
-				&& (g->map.mat[(int)roundf(g->p_x)][(int)roundf(g->p_y + 1)] == '1'))
+			if ((g->map.mat[(int)(g->p_x - 1)][(int)(g->p_y)] == '1')
+				&& (g->map.mat[(int)(g->p_x)][(int)(g->p_y + 1)] == '1'))
 				return (0);
 		}
 	}
@@ -99,25 +71,6 @@ void	rotate_player(t_game *data, float angle)
 		data->p_angle -= 2 * M_PI;
 	while (data->p_angle < 0)
 		data->p_angle += 2 * M_PI;
-}
-
-int	handle_keypress(int keycode, t_game *data)
-{
-	if (keycode == 65307)
-		quitter(data);
-	else if (keycode == 119)
-		data->move_up = 1;
-	else if (keycode == 100)
-		data->move_right = 1;
-	else if (keycode == 115)
-		data->move_down = 1;
-	else if (keycode == 97)
-		data->move_left = 1;
-	else if (keycode == 65361)
-		data->turn_left = 1;
-	else if (keycode == 65363)
-		data->turn_right = 1;
-	return (0);
 }
 
 int	handle_keyrelease(int keycode, t_game *data)

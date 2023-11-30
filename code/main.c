@@ -80,15 +80,6 @@ int	quitter(t_game *data)
 	exit(0);
 }
 
-//TODO
-
-//file da aggiungere: main, check_matr.c, check_cub.c, utils.c, check_map_utils.c
-
-//texture posizionate correttamente
-//scoprire cosa va freeato (ci sono cosa da freeare) --> //valgrind -s --leak-check=full --show-leak-kinds=all ./cub3d maps/minecraft.cub
-//norminette
-
-
 int	main(int ac, char **av)
 {
 	t_game	var;
@@ -100,6 +91,5 @@ int	main(int ac, char **av)
 		return (1);
 	check_core(av[1], &var);
 	lessgo(&var);
-	// printf("YOU DID IT\n");
 	return (0);
 }

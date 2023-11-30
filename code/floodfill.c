@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   floodfill->c                                        :+:      :+:    :+:   */
+/*   floodfill->c                                        :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbordoni <marvin@42->fr>                    +#+  +:+       +#+        */
+/*   By: nbordoni <marvin@42->fr>                    +#+  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 15:42:50 by nbordoni          #+#    #+#             */
-/*   Updated: 2023/02/12 15:42:53 by nbordoni         ###   ########->fr       */
+/*   Updated: 2023/02/12 15:42:53 by nbordoni         ###   ########->fr      */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Cub3d.h"
@@ -15,15 +15,14 @@ static int	null_check(char **temp, t_vector pos, t_vector *size)
 {
 	if (!size->flag)
 	{
-		if (!temp[pos.y] || pos.x >= (int)ft_strlen(temp[pos.y]) ||
-			pos.x < 0 || !(&temp[pos.y][pos.x]) || temp[pos.y][pos.x] == '\0')
+		if (!temp[pos.y] || pos.x >= (int)ft_strlen(temp[pos.y]) || pos.x < 0
+			|| !(&temp[pos.y][pos.x]) || temp[pos.y][pos.x] == '\0')
 			return (1);
 	}
 	else if (size->flag)
 		return (1);
 	return (0);
 }
-
 
 static void	ft_find(char **temp, t_vector *size, t_vector pos)
 {

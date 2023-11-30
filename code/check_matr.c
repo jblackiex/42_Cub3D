@@ -65,8 +65,6 @@ char	**get_map_cub(char **map, t_mat *t)
 	while (map[i])
 		map_real[j++] = ft_strdup(map[i++]);
 	map_real[j] = NULL;
-	// print_map(map_real);
-	// exit(0);
 	return (map_real);
 }
 

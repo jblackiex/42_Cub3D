@@ -76,6 +76,7 @@ char	*point_xpm(char *str)
 bool	check_extention(char *str, char *doc_cub)
 {
 	char	*buffer;
+
 	if (!ft_strncmp(doc_cub, ".cub", 4))
 	{
 		if (ft_strncmp(&str[ft_strlen(str) - 4], doc_cub, 4)

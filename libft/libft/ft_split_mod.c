@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_mod.c                                         :+:      :+:    :+:   */
+/*   ft_split_mod.c                                         :+:      :+:    :+*/
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbordoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,8 +18,6 @@ static int	ft_string(char *str, char c)
 
 	y = 0;
 	st = 0;
-	// if (str[y] == c)
-	// 	return(++st);
 	if (str[y] == c && ++st)
 		y++;
 	while (str[y])
@@ -33,7 +31,6 @@ static int	ft_string(char *str, char c)
 		while (str[y] != c && str[y])
 			y++;
 	}
-	// printf ("DIM_SPLIT=%ld\n", st);
 	return (st + 1);
 }
 
@@ -80,8 +77,6 @@ char	**ft_split_mod(char *s, char c)
 	y = -1;
 	while (++y < len)
 	{
-		//while (s[0] == c)
-			//s++;
 		ptr[y] = ft_create_string(s, c);
 		if (!ptr[y])
 			return (ft_free(ptr, y));

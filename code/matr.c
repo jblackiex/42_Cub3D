@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 #include "Cub3d.h"
 
-void	ft_free_ptr(void **ptr)
+int	ft_free_ptr(void **ptr, int fd)
 {
 	if (*ptr)
 	{
 		free(*ptr);
 		*ptr = NULL;
 	}
+	if (fd > 0)
+		print_error(fd, NULL);
+	return (1);
 }
 
 char	**get_map(char *mapy)
@@ -40,17 +43,13 @@ char	**get_map(char *mapy)
 			break ;
 		old_address = map;
 		map = ft_strjoin(old_address, holder);
-		ft_free_ptr((void *)&old_address);
-		ft_free_ptr((void *)&holder);
+		ft_free_ptr((void *)&old_address, -1);
+		ft_free_ptr((void *)&holder, -1);
 	}
 	if (old_address)
-	{
-		ft_free_ptr((void *)&map);
-		print_error(fd, NULL);
-	}
+		ft_free_ptr((void *)&map, fd);
 	result = ft_split_mod(map, '\n');
-	ft_free_ptr((void *)&map);
-	return (close(fd), result);
+	return (close(fd), ft_free_ptr((void *)&map, -1), result);
 }
 
 int	split_32(char *str, char **buffer)
@@ -76,10 +75,11 @@ int	split_32(char *str, char **buffer)
 
 int	in_order(char *str, char **set, int j, t_mat *matr)
 {
-	char		*tmp;
+	char	*tmp;
+	int		i;
 
-	int i = 0;
 	tmp = str;
+	i = 0;
 	while (*tmp && (*tmp == ' ' || *tmp == '	') && ++i)
 		tmp++;
 	if (j == -1)

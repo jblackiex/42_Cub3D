@@ -31,7 +31,7 @@ bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 		close(fd);
 		if (flag <= 0)
 			return (printf("\033[1;31mError\n .xpm empty\n\033[0m"), 1);
-		var->xpm[xpm++] = buffer; // da freeare
+		var->xpm[xpm++] = buffer;
 	}
 	else if (flag)
 		return (printf("\033[1;31mError\n .xpm issue found\n\033[0m"), 1);
@@ -59,9 +59,9 @@ bool	check_rgb_save(t_mat *m, int j, int bf, int count)
 	if (!flag && (num < 0 || num > 255 || !ft_strlen(m->r)))
 		++flag;
 	else if (!flag && !m->k)
-			m->rgb[0].color[rgb++] = num;
+		m->rgb[0].color[rgb++] = num;
 	else if (!flag)
-			m->rgb[1].color[rgb++] = num;
+		m->rgb[1].color[rgb++] = num;
 	if (flag)
 		return (free(m->r), free(buffer), 1);
 	return (free(m->r), free(buffer), 0);

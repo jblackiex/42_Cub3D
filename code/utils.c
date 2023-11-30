@@ -70,7 +70,7 @@ static int	ft_find_str(char *str)
 	}
 	if (!other && ((zero > 0 && one > 0) || (zero > 0 && space > 0)
 			|| (one > 0 && space > 0)) || (one > 0 && !space && !zero)
-			|| (zero > 0 && !space && !one))
+		|| (zero > 0 && !space && !one))
 		return (1);
 	return (0);
 }
@@ -96,20 +96,10 @@ int	not_set(char *c, char **set, int flag)
 		if (set[i][0] == '\0')
 			break ;
 		if ((i < 4 && !ft_strncmp(set[i], c, 3))
-				|| (i >= 4 && !ft_strncmp(set[i], c, 2)))
+			|| (i >= 4 && !ft_strncmp(set[i], c, 2)))
 			return (0);
 	}
 	return (1);
-}
-
-void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while(map[i])
-		printf("map[%d] = %s\n", i, map[i++]);
-
 }
 
 int	order_map(t_mat *tmp, t_mat *matr)

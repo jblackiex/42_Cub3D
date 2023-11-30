@@ -95,7 +95,7 @@ typedef struct s_game
 	t_mat		map;
 	t_vector	s_pos; // prima era hero_pos
 	char		orientation;
-	char 		*xpm[4];
+	char		*xpm[4];
 	int			width;
 	int			move_up;
 	int			move_down;
