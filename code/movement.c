@@ -104,7 +104,7 @@ void	rotate_player(t_game *data, float angle)
 int	handle_keypress(int keycode, t_game *data)
 {
 	if (keycode == 65307)
-		exit(0);
+		quitter(data);
 	else if (keycode == 119)
 		data->move_up = 1;
 	else if (keycode == 100)

@@ -42,9 +42,7 @@ void	print_error(int fd, char *str)
 void	lessgo(t_game *g)
 {
 	initializer(g);
-	// print_map(g->map.mat);
 	map_flipper(g);
-	// print_map(g->map.mat);
 	render_1(g);
 	mlx_hook(g->win, 2, 1L << 0, handle_keypress, g);
 	mlx_hook(g->win, 3, 1L << 1, handle_keyrelease, g);
@@ -71,23 +69,14 @@ int	quitter(t_game *data)
 	{
 		if (data->textures[i].img)
 			mlx_destroy_image(data->mlx, data->textures[i].img);
-		if (data->textures[i].addr)
-			ft_free_mat(&data->textures[i].addr);
-		// mlx_destroy_image(data->mlx, data->textures[i].addr);
 	}
-	// free(data->textures);
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)
 		mlx_destroy_display(data->mlx);
 	ft_free_null((char **) &data->mlx);
-	if (data->map.r)
-		ft_free_mat(&data->map.r);
-	if (data->map.buff)
-		ft_free_mat(&data->map.buff);
 	ft_free_set(data->xpm, 4);
 	ft_free_mat(data->map.mat);
-	ft_putstr_fd(NULL, 2);
 	exit(0);
 }
 
@@ -112,7 +101,5 @@ int	main(int ac, char **av)
 	check_core(av[1], &var);
 	lessgo(&var);
 	// printf("YOU DID IT\n");
-	// ft_free_set(var.xpm, 4);
-	// ft_free_mat(var.map.mat);
 	return (0);
 }

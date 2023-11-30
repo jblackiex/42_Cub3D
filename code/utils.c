@@ -13,10 +13,8 @@
 
 void	initializer(t_game *data)
 {
-	data->width = 1200;
-	data->height = 800;
-	// data->p_x = (float)data->s_pos.y + 0.5;
-	// data->p_y = (float)data->s_pos.x + 0.5;
+	data->width = 600;
+	data->height = 400;
 	data->fov = 35 * (M_PI / 180);
 	if (data->orientation == 'N')
 		data->p_angle = M_PI;
