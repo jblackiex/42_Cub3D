@@ -15,8 +15,7 @@ SRC =	code/main.c \
 	code/movement.c \
 	code/raycasting.c \
 	code/raycasting_utils.c \
-	code/imgs.c \
-	# code/keys.c \
+	code/utils2.c \
 
 BNS = ##
 	

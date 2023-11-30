@@ -139,25 +139,3 @@ int	order_map(t_mat *tmp, t_mat *matr)
 	}
 	return (ft_free_set(set, 6), tmp->mat[j] = NULL, 0);
 }
-
-void	find_player(t_game *g)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < g->map.size.y)
-	{
-		x = -1;
-		while (g->map.mat[y] && g->map.mat[y][++x])
-		{
-			if (g->map.mat[y][x] == 'N' || g->map.mat[y][x] == 'S' ||
-				g->map.mat[y][x] == 'W' || g->map.mat[y][x] == 'E')
-			{
-				g->p_x = (float)y + 0.5;
-				g->p_y = (float)x + 0.5;
-				break ;
-			}
-		}
-	}
-}
