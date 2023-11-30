@@ -6,13 +6,11 @@
 
 
 
-            C 42,82,2
+            C 42,82,233
 SO   ./textures/brick_azure.xpm   
-    EA    ./textures/brick_azure.xpm
+    EA    ./textures/ brick_azure.xpm
 
       
-
-
 
 F 0,255,3
 

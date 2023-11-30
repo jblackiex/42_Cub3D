@@ -9,6 +9,7 @@
 /*   Updated: 2023/02/12 15:43:25 by nbordoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "Cub3d.h"
 
 static int	ft_char_check(t_game *g, int count, int x, int y)

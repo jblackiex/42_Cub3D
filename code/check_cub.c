@@ -1,25 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbordoni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 15:42:59 by nbordoni          #+#    #+#             */
+/*   Updated: 2023/02/12 15:43:03 by nbordoni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "Cub3d.h"
-
-int	split_32(char *str, char **buffer) 
-{
-	int	i;
-	int	tmp;
-
-	i = 0;
-	while (str[i] && str[i] != ' ' && str[i] != '	')
-		i++;
-	tmp = i;
-	while (str[tmp])
-	{
-		if (str[tmp] != ' ' && str[tmp] != '	')
-			return (0);
-		tmp++;
-	}
-	*buffer = ft_substr(str, 0, i);
-	if (!(*buffer))
-		return (0);
-	return (1);
-}
 
 bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 {
@@ -44,7 +34,7 @@ bool	check_cub_xpm(t_mat *matr, int i, t_game *var)
 		var->xpm[xpm++] = buffer; // da freeare
 	}
 	else if (flag)
-		return (1);
+		return (printf("\033[1;31mError\n .xpm issue found\n\033[0m"), 1);
 	return (0);
 }
 

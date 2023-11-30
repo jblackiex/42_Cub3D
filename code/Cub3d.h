@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbordoni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 15:42:59 by nbordoni          #+#    #+#             */
+/*   Updated: 2023/02/12 15:43:03 by nbordoni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -117,6 +129,9 @@ int			ft_path_check(t_game *g, t_mat *var);
 int			order_map(t_mat *tmp, t_mat *matr);
 void		find_player(t_game *g);
 int			ft_free_set(char **mat, int dim);
+int			split_32(char *str, char **buffer);
+int			in_order(char *str, char **set, int j, t_mat *matr);
+int			not_set(char *c, char **set, int flag);
 
 //Raycasting
 void		initializer(t_game *data);

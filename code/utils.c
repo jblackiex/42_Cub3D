@@ -114,31 +114,6 @@ void	print_map(char **map)
 
 }
 
-int	in_order(char *str, char **set, int j, t_mat *matr)
-{
-	char		*tmp;
-
-	int i = 0;
-	tmp = str;
-	while (*tmp && (*tmp == ' ' || *tmp == '	') && ++i)
-		tmp++;
-	if (j == -1)
-		return (not_set(tmp, set, 0));
-	if (!ft_strncmp(set[j], tmp, 2))
-		return (matr->buff = tmp, 1);
-	return (0);
-}
-
-int	ft_free_set(char **mat, int dim)
-{
-	int	y;
-
-	y = -1;
-	while (++y < dim)
-		free(mat[y]);
-	return (1);
-}
-
 int	order_map(t_mat *tmp, t_mat *matr)
 {
 	int			i;

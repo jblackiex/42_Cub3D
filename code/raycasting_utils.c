@@ -22,7 +22,7 @@ int	search_longest(t_game *g)
 	{
 		if (ret < (int)ft_strlen(g->map.mat[i]))
 			ret = (int)ft_strlen(g->map.mat[i]);
-		printf("ret = %d\n", ret);
+		// printf("ret = %d\n", ret);
 	}
 	return (ret);
 }
