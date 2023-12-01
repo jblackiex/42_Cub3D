@@ -1,5 +1,4 @@
-NAME = cub3d
-NAME2 = cub3d
+NAME = cub3D
 
 LIBFT = libft/libft.a
 
@@ -16,10 +15,8 @@ SRC =	code/main.c \
 	code/raycasting.c \
 	code/raycasting_utils.c \
 	code/utils2.c \
-
-BNS = ##
 	
-FLAGS = -no-pie -g #-Wall -Werror -Wextra
+FLAGS = -no-pie -g -Wall -Werror -Wextra
 
 LINKS = -lm -lX11 -lXext
 
@@ -39,11 +36,8 @@ mlxcomp:
 comp:
 	gcc $(FLAGS) $(SRC) $(MINILIBX) $(LIBFT) $(LINKS) -o $(NAME)
 
-bonus: libcomp mlxcomp maps
-	gcc $(FLAGS) $(BNS) $(MINILIBX) $(LIBFT) $(LINKS) -o $(NAME2)
-
 libclean:
-		@make clean -C libft
+		@make clean -C libft 
 
 clean:		libclean
 
@@ -56,8 +50,8 @@ fclean:   	clean libfclean
 		
 re: fclean all
 
-reb: fclean bonus
+reb: fclean
 
-.PHONY: all re clean fclean bonus maps
+.PHONY: all re clean fclean maps
 
 .SILENT:

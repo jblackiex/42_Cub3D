@@ -42,6 +42,7 @@ int	ft_path_check(t_game *g, t_mat *t)
 	int	res;
 
 	t->size.count = 0;
+	t->size.flag = 0;
 	res = ft_flood_fill(&t->mat[t->i], &t->size, g->s_pos);
 	if (t->size.flag == 1)
 		printf("\033[1;31mError\n Map is not surrounded by walls\n\033[0m");

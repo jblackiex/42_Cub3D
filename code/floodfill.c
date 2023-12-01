@@ -36,10 +36,10 @@ static void	ft_find(char **temp, t_vector *size, t_vector pos)
 		return ;
 	temp[pos.y][pos.x] = '1';
 	size->count++;
-	ft_find(temp, size, (t_vector){pos.x + 1, pos.y});
-	ft_find(temp, size, (t_vector){pos.x - 1, pos.y});
-	ft_find(temp, size, (t_vector){pos.x, pos.y + 1});
-	ft_find(temp, size, (t_vector){pos.x, pos.y - 1});
+	ft_find(temp, size, (t_vector){pos.x + 1, pos.y, 0, 0});
+	ft_find(temp, size, (t_vector){pos.x - 1, pos.y, 0, 0});
+	ft_find(temp, size, (t_vector){pos.x, pos.y + 1, 0, 0});
+	ft_find(temp, size, (t_vector){pos.x, pos.y - 1, 0, 0});
 }
 
 int	ft_flood_fill(char **tab, t_vector *size, t_vector begin)

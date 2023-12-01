@@ -69,8 +69,8 @@ static int	ft_find_str(char *str)
 		i++;
 	}
 	if (!other && ((zero > 0 && one > 0) || (zero > 0 && space > 0)
-			|| (one > 0 && space > 0)) || (one > 0 && !space && !zero)
-		|| (zero > 0 && !space && !one))
+			|| (one > 0 && space > 0) || (one > 0 && !space && !zero)
+			|| (zero > 0 && !space && !one)))
 		return (1);
 	return (0);
 }
@@ -122,7 +122,7 @@ int	order_map(t_mat *tmp, t_mat *matr)
 				i = -1;
 			}
 		}
-		else if (j > 5 && in_order(&matr->mat[i][0], set, -1, matr) ||
+		else if ((j > 5 && in_order(&matr->mat[i][0], set, -1, matr)) ||
 				(i > 5 && (ft_find_str(matr->mat[i - 1])
 				|| (matr->mat[i + 1] && ft_find_str(matr->mat[i + 1])))))
 			tmp->mat[j++] = ft_strdup(matr->mat[i]);
