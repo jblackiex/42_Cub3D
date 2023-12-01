@@ -95,8 +95,8 @@ int	not_set(char *c, char **set, int flag)
 	{
 		if (set[i][0] == '\0')
 			break ;
-		if ((i < 4 && !ft_strncmp(set[i], c, 3))
-			|| (i >= 4 && !ft_strncmp(set[i], c, 2)))
+		if ((i < 4 && !ft_strncmp(set[i], c, 2))
+			|| (i >= 4 && !ft_strncmp(set[i], c, 1)))
 			return (0);
 	}
 	return (1);

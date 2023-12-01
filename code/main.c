@@ -13,10 +13,9 @@
 
 void	print_error(int fd, char *str)
 {
-	if (!str)
+	if ((!str && (fd > 0 && close(fd))) || !str)
 	{
 		printf("\033[1;31mError\n Empty .cub or file not found\n\033[0m");
-		close(fd);
 		exit(1);
 	}
 	else if (!ft_strncmp(str, ".cub", 4))

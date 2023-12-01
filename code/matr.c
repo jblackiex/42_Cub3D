@@ -28,8 +28,8 @@ char	**get_map(char *mapy)
 	char	**result;
 	char	*holder;
 	char	*old_address;
-	char	*map;
 	int		fd;
+	char	*map;
 
 	fd = open(mapy, O_RDONLY);
 	if (fd == -1)
@@ -43,13 +43,13 @@ char	**get_map(char *mapy)
 			break ;
 		old_address = map;
 		map = ft_strjoin(old_address, holder);
-		ft_free_ptr((void *)&old_address, -1);
-		ft_free_ptr((void *)&holder, -1);
+		ft_free_ptr((void *)&old_address, -200);
+		ft_free_ptr((void *)&holder, -200);
 	}
 	if (old_address)
 		ft_free_ptr((void *)&map, fd);
 	result = ft_split_mod(map, '\n');
-	return (close(fd), ft_free_ptr((void *)&map, -1), result);
+	return (close(fd), ft_free_ptr((void *)&map, -200), result);
 }
 
 int	split_32(char *str, char **buffer)
