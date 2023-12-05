@@ -17,8 +17,10 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 #### 1. ```git clone --recursive https://github.com/jblackiex/42_Cub3d.git```
 
-#### 2. ```./cub3D maps/*.cub```
+#### 2. ```make```
 
-#### 3. ```WASD && Arrow keys to play```
+#### 3. ```./cub3D maps/*.cub```
+
+#### 4. ```WASD && Arrow keys to play```
 
 <img src="https://github.com/jblackiex/42_so_long/blob/7e1f813eb4925cdf4e53cff1a007f151f6e4a9d5/textures/so_long.gif" alt="map_enemy3.ber" style="width:220px;height:220px;" border="3">
