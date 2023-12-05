@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linuxx/mlx.h"
 
 typedef struct s_vector
 {

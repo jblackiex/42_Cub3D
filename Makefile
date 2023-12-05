@@ -2,7 +2,7 @@ NAME = cub3D
 
 LIBFT = libft/libft.a
 
-MINILIBX = minilibx-linux/libmlx.a
+MINILIBX = minilibx-linuxx/libmlx.a
 
 SRC =	code/main.c \
 	code/floodfill.c \
@@ -31,7 +31,7 @@ libcomp:
 		@make -C libft
 
 mlxcomp:
-		@cd minilibx-linux && ./configure
+		@cd minilibx-linuxx && ./configure
 
 comp:
 	gcc $(FLAGS) $(SRC) $(MINILIBX) $(LIBFT) $(LINKS) -o $(NAME)
