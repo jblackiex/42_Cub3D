@@ -15,7 +15,7 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 ## ./how_to_run 🕹️
 
-#### 1. ```git clone --recursive https://github.com/jblackiex/42_Cub3d.git``` (if you don't have OpenGL)
+#### 1. ```git clone --recursive https://github.com/jblackiex/42_Cub3d.git```
 
 #### 2. ```./cub3D maps/*.cub```
 
