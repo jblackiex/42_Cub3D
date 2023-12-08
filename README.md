@@ -8,7 +8,7 @@
 </p>
 
 
-# 42_Cub3d
+# 42_Cub3D
 This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. Raycasting Included. made with @GBO22
 
 [LINUX]
