@@ -1,10 +1,10 @@
 
 <p align="right">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/jblackiex/42_Cub3d?color=lightblue" />
-	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/jblackiex/42_Cub3d?color=critical" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/jblackiex/42_Cub3d?color=yellow" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/jblackiex/42_Cub3d?color=black" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/jblackiex/42_Cub3d?color=green" />
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/jblackiex/42_Cub3D?color=lightblue" />
+	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/jblackiex/42_Cub3D?color=critical" />
+	<img alt="Code language count" src="https://img.shields.io/github/languages/count/jblackiex/42_Cub3D?color=yellow" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/jblackiex/42_Cub3D?color=black" />
+	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/jblackiex/42_Cub3D?color=green" />
 </p>
 
 
@@ -15,7 +15,7 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 ## ./how_to_run 🕹️
 
-#### 1. ```git clone --recursive git@github.com:jblackiex/42_Cub3d.git```
+#### 1. ```git clone --recursive git@github.com:jblackiex/42_Cub3D.git```
 
 #### 2. ```make```
 
@@ -23,4 +23,4 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 #### 4. ```WASD && Arrow keys to play```
 
-<img src="https://github.com/jblackiex/42_Cub3d/blob/main/textures/Cub3D.gif" alt="dire.cub" style="width:600px;height:440px;" border="3">
+<img src="https://github.com/jblackiex/42_Cub3D/blob/main/textures/Cub3D.gif" alt="dire.cub" style="width:600px;height:440px;" border="3">
