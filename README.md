@@ -15,7 +15,7 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 ## ./how_to_run 🕹️
 
-#### 1. ```git clone --recursive https://github.com/jblackiex/42_Cub3d.git```
+#### 1. ```git clone --recursive git@github.com:jblackiex/42_Cub3d.git```
 
 #### 2. ```make```
 
@@ -23,4 +23,4 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 #### 4. ```WASD && Arrow keys to play```
 
-<img src="https://github.com/jblackiex/42_Cub3d/blob/7e1f813eb4925cdf4e53cff1a007f151f6e4a9d5/textures/Cub3D.gif" alt="dire.cub" style="width:600px;height:440px;" border="3">
+<img src="https://github.com/jblackiex/42_Cub3d/blob/main/textures/Cub3D.gif" alt="dire.cub" style="width:600px;height:440px;" border="3">
